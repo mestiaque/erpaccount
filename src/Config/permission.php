@@ -32,6 +32,13 @@ return [
                     'all'  => 'All',
                 ],
             ],
+            'integration_bridges' => [
+                'label'       => 'Integration Bridges',
+                'permissions' => [
+                    'list' => 'List',
+                    'all'  => 'All',
+                ],
+            ],
 
             'chart_of_accounts' => [
                 'label'       => 'Chart of Accounts',
@@ -122,6 +129,36 @@ return [
                     'delete' => 'Delete',
                     'match'  => 'Match',
                     'all'    => 'All',
+                ],
+            ],
+            'manual_inventory' => [
+                'label'       => 'Manual Inventory',
+                'permissions' => [
+                    'list' => 'List',
+                    'add'  => 'Create',
+                    'view' => 'View',
+                    'post' => 'Post',
+                    'all'  => 'All',
+                ],
+            ],
+            'manual_payroll' => [
+                'label'       => 'Manual Payroll',
+                'permissions' => [
+                    'list' => 'List',
+                    'add'  => 'Create',
+                    'view' => 'View',
+                    'post' => 'Post',
+                    'all'  => 'All',
+                ],
+            ],
+            'commercial_lc_tracker' => [
+                'label'       => 'Commercial LC Tracker',
+                'permissions' => [
+                    'list' => 'List',
+                    'add'  => 'Create',
+                    'view' => 'View',
+                    'sync' => 'Sync',
+                    'all'  => 'All',
                 ],
             ],
             'executive_financial_dashboard' => [

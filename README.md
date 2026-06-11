@@ -79,5 +79,4 @@ API base: `/api/erpaccount/v1/...`
 - Trial Balance, P&L, Balance Sheet, Party Ledger, Executive Dashboard
 - Bank reconciliation worksheet
 - Sidebar permissions wired to `erpaccount.*` keys
-
-Manual inventory/payroll bridge screens remain available by direct URL but are **not** listed in the sidebar (external module integration is out of scope for this delivery).
+- Manual Inventory, Manual Payroll, and Commercial LC Tracker bridge screens listed in the sidebar

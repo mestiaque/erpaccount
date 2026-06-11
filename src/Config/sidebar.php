@@ -138,6 +138,35 @@ return [
                     ],
                 ],
                 [
+                    'title'      => 'Integration Bridges',
+                    'icon'       => 'fa-solid fa-link',
+                    'icon_color' => 'text-info',
+                    'permission' => 'integration_bridges',
+                    'children'   => [
+                        [
+                            'title'      => 'Manual Inventory',
+                            'icon'       => 'fa-solid fa-arrow-right',
+                            'route'      => '/erpaccount/manual-inventory',
+                            'icon_color' => 'text-warning',
+                            'permission' => 'manual_inventory',
+                        ],
+                        [
+                            'title'      => 'Manual Payroll',
+                            'icon'       => 'fa-solid fa-arrow-right',
+                            'route'      => '/erpaccount/manual-payroll',
+                            'icon_color' => 'text-warning',
+                            'permission' => 'manual_payroll',
+                        ],
+                        [
+                            'title'      => 'Commercial LC Tracker',
+                            'icon'       => 'fa-solid fa-arrow-right',
+                            'route'      => '/erpaccount/commercial-lc-tracker',
+                            'icon_color' => 'text-warning',
+                            'permission' => 'commercial_lc_tracker',
+                        ],
+                    ],
+                ],
+                [
                     'title'      => 'Reports Center (All)',
                     'icon'       => 'fa-solid fa-table',
                     'icon_color' => 'text-success',
@@ -155,6 +184,5 @@ return [
         ],
     ],
 ];
-
 
 
