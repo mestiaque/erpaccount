@@ -8,8 +8,8 @@
     <div class="flex-grow-1">
         <div class="card border-0 shadow-lg text-white mb-4" style="background: linear-gradient(95deg, #0f172a 0%, #1e293b 55%, #065f46 100%);">
             <div class="card-body p-4 p-lg-5">
-                <p class="small font-weight-bold text-uppercase mb-2" style="letter-spacing: .2rem; color: #bbf7d0;">Phase 4 Reports</p>
-                <h1 class="h3 mb-2">Party Ledger History</h1>
+                <p class="small font-weight-bold text-uppercase mb-2" style="letter-spacing: .2rem; color: #bbf7d0;">Reports</p>
+                <h1 class="h3 mb-2 text-white">Party Ledger History</h1>
                 <p class="mb-0" style="color: #dcfce7;">Track full transaction history with opening balance, running balance, and closing balance by Buyer, Supplier, or Employee.</p>
             </div>
         </div>
@@ -196,3 +196,4 @@
         })(jQuery);
     </script>
 @endpush
+                                                                                                                                    

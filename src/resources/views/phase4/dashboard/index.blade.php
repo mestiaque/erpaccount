@@ -12,7 +12,7 @@
                     <div class="row g-3 align-items-end justify-content-between">
                         <div class="col-lg-8">
                             <p class="small fw-semibold text-uppercase mb-2" style="letter-spacing: .28rem; color: #bfdbfe;">Executive Command Center</p>
-                            <h1 class="h2 mb-2 text-white">Garments Accounts 360 Dashboard</h1>
+                            <h1 class="h2 mb-2 text-white"> Accounts Dashboard</h1>
                             <p class="mb-0" style="color: #dbeafe;">Consolidated accounting intelligence from ledgers, LC liabilities, operational cost centers, and approval queues.</p>
                         </div>
                         <div class="col-lg-auto">

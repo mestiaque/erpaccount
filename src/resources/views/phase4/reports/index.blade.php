@@ -9,7 +9,7 @@
         <div class="bg-light" >
             <div class="card border-0 shadow-lg text-white mb-4" style="background: linear-gradient(95deg, #020617 0%, #1e293b 55%, #1d4ed8 100%);">
                 <div class="card-body p-4 p-lg-5">
-                    <p class="small fw-semibold text-uppercase mb-2" style="letter-spacing: .28rem; color: #bfdbfe;">Phase 4 Reports</p>
+                    <p class="small fw-semibold text-uppercase mb-2" style="letter-spacing: .28rem; color: #bfdbfe;">Reports</p>
                     <h1 class="h2 mb-2 text-white">Financial Statement Builder</h1>
                     <p class="mb-0" style="color: #dbeafe;">Generate Trial Balance, Profit &amp; Loss, or Balance Sheet with date-range filters and export actions.</p>
                 </div>

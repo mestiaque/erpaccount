@@ -9,8 +9,8 @@
         <div class="bg-light" >
             <div class="card border-0 shadow-lg text-white mb-4" style="background: linear-gradient(95deg, #020617 0%, #312e81 55%, #047857 100%);">
                 <div class="card-body p-4 p-lg-5">
-                    <p class="small fw-semibold text-uppercase mb-2" style="letter-spacing: .28rem; color: #a7f3d0;">Phase 4 Profitability</p>
-                    <h1 class="h2 mb-2">Style &amp; Order Profitability Monitor</h1>
+                    <p class="small fw-semibold text-uppercase mb-2" style="letter-spacing: .28rem; color: #a7f3d0;">Profitability</p>
+                    <h1 class="h2 mb-2 text-white">Style &amp; Order Profitability Monitor</h1>
                     <p class="mb-0" style="color: #ccfbf1;">Analyze one style/job order at a time by cost center with real journal-level cost and revenue classification.</p>
                 </div>
             </div>

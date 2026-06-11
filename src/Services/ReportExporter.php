@@ -2,6 +2,7 @@
 
 namespace ME\Erpaccount\Services;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ReportExporter
@@ -46,7 +47,7 @@ class ReportExporter
         ]);
     }
 
-    public function downloadExcel(array $report, string $slug): StreamedResponse
+    public function downloadExcel(array $report, string $slug): Response
     {
         $fileName = $this->fileName($slug, 'xls');
         $html = view('erpaccount::phase4.reports_hub.excel', ['report' => $report])->render();

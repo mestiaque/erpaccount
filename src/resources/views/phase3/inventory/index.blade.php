@@ -38,7 +38,7 @@
         <div class="inventory-hero p-4 mb-4 shadow-sm">
             <div class="row align-items-end">
                 <div class="col-lg-8 mb-3 mb-lg-0">
-                    <div class="small text-uppercase" style="letter-spacing:.18em;opacity:.85;">Phase 3 Manual Posting</div>
+                    <div class="small text-uppercase" style="letter-spacing:.18em;opacity:.85;">Manual Posting</div>
                     <h3 class="mb-2 mt-2">Inventory Financial Journal Screen</h3>
                     <p class="mb-0" style="opacity:.9;">
                         Manually enter the inventory voucher, verify journal impact, and post a direct double-entry to Accounts.

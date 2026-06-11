@@ -15,6 +15,20 @@ class ErpaccountServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/Config' => config_path('erpaccount'),
         ], 'erpaccount-config');
+
+        // Keep host permission modules first and append package modules at the end.
+        $basePermissionModules = config('permission.modules', []);
+        $packagePermissionModules = config('erpaccount.permissions.modules', []);
+
+        if (is_array($basePermissionModules) && is_array($packagePermissionModules)) {
+            config([
+                'permission.modules' => $this->mergeMissingRecursive(
+                    $basePermissionModules,
+                    $packagePermissionModules,
+                ),
+            ]);
+        }
+        
     }
 
     public function register()
@@ -34,5 +48,25 @@ class ErpaccountServiceProvider extends ServiceProvider
         if (file_exists(__DIR__ . '/Config/reports.php')) {
             $this->mergeConfigFrom(__DIR__ . '/Config/reports.php', 'erpaccount.reports');
         }
+    }
+
+    /**
+     * Merge only missing keys from $additional into $base recursively.
+     * Existing $base values remain unchanged.
+     */
+    private function mergeMissingRecursive(array $base, array $additional): array
+    {
+        foreach ($additional as $key => $value) {
+            if (!array_key_exists($key, $base)) {
+                $base[$key] = $value;
+                continue;
+            }
+
+            if (is_array($base[$key]) && is_array($value)) {
+                $base[$key] = $this->mergeMissingRecursive($base[$key], $value);
+            }
+        }
+
+        return $base;
     }
 }

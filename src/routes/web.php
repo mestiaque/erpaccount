@@ -6,6 +6,7 @@ use ME\Erpaccount\Http\Controllers\BankReconciliationController;
 use ME\Erpaccount\Http\Controllers\CashBankVoucherController;
 use ME\Erpaccount\Http\Controllers\ChartOfAccountController;
 use ME\Erpaccount\Http\Controllers\CommercialLcTrackerController;
+use ME\Erpaccount\Http\Controllers\CostCenterController;
 use ME\Erpaccount\Http\Controllers\DashboardController;
 use ME\Erpaccount\Http\Controllers\FinancialPeriodController;
 use ME\Erpaccount\Http\Controllers\FinancialReportController;
@@ -32,6 +33,16 @@ Route::middleware($webMiddleware)->prefix('erpaccount')->as('erpaccount.')->grou
     Route::resource('bank-accounts', BankAccountController::class)
         ->parameters(['bank-accounts' => 'bankAccount'])
         ->except(['create', 'show', 'edit']);
+
+    Route::resource('cost-centers', CostCenterController::class)
+        ->parameters(['cost-centers' => 'costCenter'])
+        ->except(['create', 'show', 'edit']);
+    Route::post('cost-centers/types', [CostCenterController::class, 'storeType'])
+        ->name('cost-centers.types.store');
+    Route::put('cost-centers/types/{costCenterType}', [CostCenterController::class, 'updateType'])
+        ->name('cost-centers.types.update');
+    Route::delete('cost-centers/types/{costCenterType}', [CostCenterController::class, 'destroyType'])
+        ->name('cost-centers.types.destroy');
 
     Route::resource('tax-rates', TaxRateController::class)
         ->parameters(['tax-rates' => 'taxRate'])
