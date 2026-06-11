@@ -12,7 +12,7 @@
                     <div class="row g-3 align-items-end justify-content-between">
                         <div class="col-lg-8">
                             <p class="small fw-semibold text-uppercase mb-2" style="letter-spacing: .28rem; color: #fde68a;">Manual Posting</p>
-                            <h1 class="h2 mb-2">Payroll &amp; Wages Manual Entry Screen</h1>
+                            <h1 class="h2 mb-2 text-white">Payroll &amp; Wages Manual Entry Screen</h1>
                             <p class="mb-0" style="color: #f1f5f9;">Enter monthly payroll totals manually, verify the double-entry balance in real time, and post one consolidated journal voucher directly into the Accounts module.</p>
                         </div>
                         <div class="col-lg-4">
