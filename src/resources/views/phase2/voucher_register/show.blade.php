@@ -63,7 +63,7 @@
                                     <td>
                                         {{ $line->chartOfAccount?->account_code }} - {{ $line->chartOfAccount?->account_name }}
                                     </td>
-                                    <td>{{ $line->cost_center_id ?: '—' }}</td>
+                                    <td>{{ $line->costCenter?->cost_center_name ?? ($line->cost_center_id ?: '—') }}</td>
                                     <td>
                                         @if ($line->party_type && $line->party_type !== 'None')
                                             {{ $line->party_type }} #{{ $line->party_id }}

@@ -59,7 +59,7 @@ class VoucherRegisterController extends Controller
 
     public function show(Request $request, JournalMaster $journalMaster)
     {
-        $journalMaster->load(['details.chartOfAccount']);
+        $journalMaster->load(['details.chartOfAccount', 'details.costCenter']);
 
         if ($this->isApiRequest($request)) {
             return response()->json(['data' => $journalMaster]);
