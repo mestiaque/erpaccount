@@ -6,6 +6,16 @@
 
 @section('contents')
     <div class="flex-grow-1">
+        <div class="alert alert-info d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <div class="mr-3">
+                <strong>Internal Ledger Entries are created first.</strong>
+                Post the bank-side journal in Cash &amp; Bank Vouchers, then match it here with the statement row.
+            </div>
+            <a href="{{ route('erpaccount.cash-bank-vouchers.index') }}" class="btn btn-sm btn-outline-primary mt-2 mt-md-0">
+                Open Cash &amp; Bank Vouchers
+            </a>
+        </div>
+
         <div class="card shadow-sm mb-3">
             <div class="card-body">
                 <form method="GET" action="{{ route('erpaccount.bank-reconciliation.index') }}" class="form-row align-items-end">
@@ -68,7 +78,12 @@
                                             <td>{{ number_format((float) $entry->credit_amount, 2) }}</td>
                                         </tr>
                                     @empty
-                                        <tr><td colspan="5" class="text-center text-muted">No internal entries found.</td></tr>
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted py-4">
+                                                No internal entries found for this bank account yet.
+                                                Create a Cash &amp; Bank voucher or journal entry that uses this bank ledger, then return here to reconcile it.
+                                            </td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>

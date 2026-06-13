@@ -44,6 +44,13 @@ return [
                     'permission' => 'executive_financial_dashboard',
                 ],
                 [
+                    'title'      => 'Accounts Tutorial',
+                    'icon'       => 'fa-solid fa-book-open-reader',
+                    'route'      => '/erpaccount/accounts-tutorial',
+                    'icon_color' => 'text-warning',
+                    'permission' => '',
+                ],
+                [
                     'title'      => 'Configurations',
                     'icon'       => 'fa-solid fa-screwdriver-wrench',
                     'icon_color' => 'text-info',

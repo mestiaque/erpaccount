@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use ME\Erpaccount\Http\Controllers\BankAccountController;
 use ME\Erpaccount\Http\Controllers\BankReconciliationController;
 use ME\Erpaccount\Http\Controllers\CashBankVoucherController;
+use ME\Erpaccount\Http\Controllers\AccountsTutorialController;
 use ME\Erpaccount\Http\Controllers\ChartOfAccountController;
 use ME\Erpaccount\Http\Controllers\CommercialLcTrackerController;
 use ME\Erpaccount\Http\Controllers\CostCenterController;
@@ -97,6 +98,9 @@ Route::middleware($webMiddleware)->prefix('erpaccount')->as('erpaccount.')->grou
     Route::get('financial-reports', [FinancialReportController::class, 'index'])->name('financial-reports.index');
     Route::get('financial-reports/export-excel', [FinancialReportController::class, 'exportExcel'])->name('financial-reports.export-excel');
     Route::get('financial-reports/print', [FinancialReportController::class, 'printFriendly'])->name('financial-reports.print');
+
+    Route::get('accounts-tutorial', [AccountsTutorialController::class, 'index'])
+        ->name('accounts-tutorial.index');
 
     Route::get('party-ledger', [PartyLedgerController::class, 'index'])->name('party-ledger.index');
     Route::get('party-ledger/export-excel', [PartyLedgerController::class, 'exportExcel'])->name('party-ledger.export-excel');
