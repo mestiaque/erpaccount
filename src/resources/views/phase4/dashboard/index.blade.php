@@ -202,9 +202,9 @@
                             </p>
                         </div>
                         <div class="d-flex flex-wrap gap-2">
-                            <a href="{{ route('erpaccount.manual-inventory.index') }}" class="btn btn-outline-secondary btn-sm">Inventory Queue</a>
-                            <a href="{{ route('erpaccount.manual-payroll.index') }}" class="btn btn-outline-secondary btn-sm">Payroll Queue</a>
-                            <a href="{{ route('erpaccount.manual-inventory.index') }}" class="btn btn-dark btn-sm">Go to Approval Queue</a>
+                            <a href="{{ route('erpaccount.approvals.index') }}#inventory" class="btn btn-outline-secondary btn-sm">Inventory Queue</a>
+                            <a href="{{ route('erpaccount.approvals.index') }}#payroll" class="btn btn-outline-secondary btn-sm">Payroll Queue</a>
+                            <a href="{{ route('erpaccount.approvals.index') }}" class="btn btn-dark btn-sm">Go to Approval Queue</a>
                         </div>
                     </div>
                 </div>

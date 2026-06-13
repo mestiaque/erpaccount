@@ -19,6 +19,7 @@ use ME\Erpaccount\Http\Controllers\PayrollIntegrationController;
 use ME\Erpaccount\Http\Controllers\StyleProfitabilityController;
 use ME\Erpaccount\Http\Controllers\TaxRateController;
 use ME\Erpaccount\Http\Controllers\VoucherRegisterController;
+use ME\Erpaccount\Http\Controllers\ApprovalQueueController;
 
 $webMiddleware = config('erpaccount.route_middleware', ['web']);
 
@@ -86,6 +87,10 @@ Route::middleware($webMiddleware)->prefix('erpaccount')->as('erpaccount.')->grou
 
     Route::get('manual-payroll', [PayrollIntegrationController::class, 'index'])->name('manual-payroll.index');
     Route::post('manual-payroll', [PayrollIntegrationController::class, 'store'])->name('manual-payroll.store');
+
+    Route::get('approvals', [ApprovalQueueController::class, 'index'])->name('approvals.index');
+    Route::post('approvals/approve-inventory/{logId}', [ApprovalQueueController::class, 'approveInventory'])->name('approvals.approve-inventory');
+    Route::post('approvals/approve-payroll/{batchId}', [ApprovalQueueController::class, 'approvePayroll'])->name('approvals.approve-payroll');
 
     Route::get('executive-dashboard', [DashboardController::class, 'index'])->name('executive-dashboard.index');
     Route::get('style-profitability', [StyleProfitabilityController::class, 'index'])->name('style-profitability.index');

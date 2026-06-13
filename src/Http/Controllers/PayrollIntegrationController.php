@@ -42,6 +42,7 @@ class PayrollIntegrationController extends Controller
             $pfLiability = $this->resolveLedger(['provident fund liability', 'pf liability', 'provident fund payable'], ['Liability']);
             $advanceAsset = $this->resolveLedger(['advance salary', 'salary advance', 'advance salary asset'], ['Asset']);
             $salaryPayable = $this->resolveLedger(['salary payable', 'wages payable', 'payable'], ['Liability']);
+            // dd($salaryExpense, $pfLiability, $advanceAsset, $salaryPayable);
 
             if ($salaryExpense === null || $pfLiability === null || $advanceAsset === null || $salaryPayable === null) {
                 DB::rollBack();
