@@ -376,6 +376,7 @@
                     <span class="list-group-item list-group-item-action doc-nav-item text-success font-weight-bold" data-target="section-decision"><i class="fa fa-exchange-alt"></i>লেজার সিলেকশন ডিশিশন ট্রি</span>
                     <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-logic-guides"><i class="fa fa-graduation-cap"></i>Voucher & Party Guides</span>
                     <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-workflows"><i class="fa fa-random"></i>ব্যবসায়িক SOP ওয়ার্কফ্লো</span>
+                    <span class="list-group-item list-group-item-action doc-nav-item text-primary font-weight-bold" data-target="section-demodata"><i class="fa fa-table"></i>১০ সেট টেস্ট ডেমো ডাটা গাইড</span>
                     
                     <div class="list-group-item bg-light text-uppercase font-weight-bold small text-muted px-3 py-2">সহায়তা ও ভুল সংশোধন</div>
                     <span class="list-group-item list-group-item-action doc-nav-item text-danger" data-target="section-troubleshoot"><i class="fa fa-exclamation-triangle"></i>সাধারণ ভুলসমূহ ও FAQ</span>
@@ -1360,6 +1361,247 @@
                             <div class="flow-node">৫. সরবরাহকারীকে ব্যাংক চেক প্রদান (Payment Voucher)<br><span class="small text-muted">Debit: Supplier AP, Credit: Bank Account</span></div>
                             <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
                             <div class="flow-node text-white" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);">৬. ব্যাংক স্টেটমেন্ট মেলালে ফাইনাল ম্যাচিং সম্পন্ন হবে (Reconciliation)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: Demo Data -->
+            <div id="section-demodata" class="doc-section">
+                <div class="card card-custom">
+                    <div class="card-custom-header d-flex justify-content-between align-items-center">
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">১৪ (ক). ১০ সেট রিয়েল-লাইফ টেস্ট ডেমো ডাটা (Demo Data & Setup Grid)</h2>
+                        <span class="badge badge-success badge-custom">Demo Data</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted mb-4">
+                            অ্যাকাউন্টস সিস্টেমটি সঠিকভাবে কাজ করছে কি না বা নতুন কোনো ডাটা এন্ট্রি টেস্ট করতে চান? নিচে ১০টি বাস্তবভিত্তিক ব্যবসায়িক লেনদেনের ডেমো ডাটা দেওয়া হলো। এর মাধ্যমে আপনি চার্ট অফ অ্যাকাউন্টস (COA)-এ প্রয়োজনীয় লেজার খতিয়ান তৈরি করা থেকে শুরু করে ভাউচার পোস্টিংয়ের সম্পূর্ণ পরীক্ষা করতে পারবেন।
+                        </p>
+
+                        <!-- Accordion or Tables of 10 Data Sets -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-custom">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">ক্র.নং</th>
+                                        <th style="width: 25%;">ব্যবসায়িক ঘটনা (Scenario)</th>
+                                        <th style="width: 35%;">ধাপ ১: Chart of Accounts (COA) সেটআপ</th>
+                                        <th style="width: 35%;">ধাপ ২: ভাউচার এন্ট্রি (Manual Entry) পোস্টিং</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 1. Rent Security Deposit -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">১</td>
+                                        <td><strong>অফিস জামানত প্রদান:</strong> নতুন ডেকোরেশনের জন্য অফিসের মালিককে ক্যাশ সিকিউরিটি ডিপোজিট বাবদ ১,০০,০০০ টাকা অগ্রিম প্রদান।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>কোড:</strong> <code>1220-001</code></li>
+                                                <li><strong>নাম:</strong> <code>Office Security Deposit</code></li>
+                                                <li><strong>টাইপ:</strong> <code>Asset</code></li>
+                                                <li><strong>প্যারেন্ট:</strong> <code>Non-Current Assets</code></li>
+                                                <li><strong>Reconcilable:</strong> না</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Payment Voucher (PV)</li>
+                                                <li><strong>Main Cash/Bank:</strong> <code>DBBL Bank A/C</code></li>
+                                                <li><strong>Against Account:</strong> <code>Office Security Deposit</code></li>
+                                                <li><strong>কস্ট সেন্টার:</strong> N/A (প্রয়োজন নেই)</li>
+                                                <li><strong>পার্টি:</strong> N/A (প্রয়োজন নেই)</li>
+                                                <li><strong>টাকা:</strong> <code>100,000</code> BDT</li>
+                                                <li><strong>Narration:</strong> <code>Security deposit paid for new office building</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 2. Share Capital Initial Capital -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">২</td>
+                                        <td><strong>প্রারম্ভিক মূলধন বিনিয়োগ:</strong> কোম্পানির অংশীদারদের শেয়ার মূলধন বাবদ ৫০,০০,০০০ টাকা ডাচ-বাংলা ব্যাংক অ্যাকাউন্টে জমা করা হলো।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>কোড:</strong> <code>3110-001</code></li>
+                                                <li><strong>নাম:</strong> <code>Share Capital</code></li>
+                                                <li><strong>টাইপ:</strong> <code>Equity</code></li>
+                                                <li><strong>প্যারেন্ট:</strong> <code>Capital/Equity</code></li>
+                                                <li><strong>Reconcilable:</strong> না</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Receipt Voucher (RV)</li>
+                                                <li><strong>Main Cash/Bank:</strong> <code>DBBL Bank A/C</code></li>
+                                                <li><strong>Against Account:</strong> <code>Share Capital</code></li>
+                                                <li><strong>কস্ট সেন্টার:</strong> N/A</li>
+                                                <li><strong>পার্টি:</strong> N/A</li>
+                                                <li><strong>টাকা:</strong> <code>5,000,000</code> BDT</li>
+                                                <li><strong>Narration:</strong> <code>Initial capital invested by directors in DBBL A/C</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 3. Printing Expense -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">৩</td>
+                                        <td><strong>স্টেশনারি ক্রয়:</strong> অফিসের ব্যবহারের জন্য মেমোপ্যাড ও ফাইল কভার তৈরিতে ক্যাশ বক্স থেকে ৪,৫০০ টাকা খরচ করা হলো।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>কোড:</strong> <code>5110-003</code></li>
+                                                <li><strong>নাম:</strong> <code>Printing and Stationery</code></li>
+                                                <li><strong>টাইপ:</strong> <code>Expense</code></li>
+                                                <li><strong>প্যারেন্ট:</strong> <code>Administrative Expenses</code></li>
+                                                <li><strong>Reconcilable:</strong> না</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Payment Voucher (PV)</li>
+                                                <li><strong>Main Cash/Bank:</strong> <code>Petty Cash Account</code></li>
+                                                <li><strong>Against Account:</strong> <code>Printing and Stationery</code></li>
+                                                <li><strong>কস্ট সেন্টার:</strong> <code>Dhaka Head Office</code> (বাধ্যতামূলক)</li>
+                                                <li><strong>পার্টি:</strong> N/A</li>
+                                                <li><strong>টাকা:</strong> <code>4,500</code> BDT</li>
+                                                <li><strong>Narration:</strong> <code>Memo pad and file folders printing cost</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 4. Credit Sales to Buyer -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">৪</td>
+                                        <td><strong>বাকিতে পোশাক বিক্রয়:</strong> বায়ার করিম ফ্যাশনস লিমিটেডের নিকট ১৫,০০,০০০ টাকার তৈরি পোশাক বাকিতে রপ্তানি সম্পন্ন হলো।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>১. কাস্টমার লেজার:</strong> কোড <code>1130-001</code>, নাম <code>Accounts Receivable - Buyers</code>, টাইপ <code>Asset</code> (প্যারেন্ট: Current Assets).</li>
+                                                <li><strong>২. রেভিনিউ লেজার:</strong> কোড <code>4110-001</code>, নাম <code>Export Sales Revenue</code>, টাইপ <code>Revenue</code> (প্যারেন্ট: Sales).</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Journal Voucher (JV)</li>
+                                                <li><strong>রো ১:</strong> <code>Accounts Receivable - Buyers</code> (Dr) | টাকা: <code>1,500,000</code> | পার্টি: <code>Karim Fashion</code> (Buyer) | কস্ট সেন্টার: N/A</li>
+                                                <li><strong>রো ২:</strong> <code>Export Sales Revenue</code> (Cr) | টাকা: <code>1,500,000</code> | পার্টি: N/A | কস্ট সেন্টার: <code>Style Order ST-2026</code></li>
+                                                <li><strong>Narration:</strong> <code>Sales invoice #INV-001 for Style ST-2026 to Karim Fashion</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 5. Cheque Collection from Buyer -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">৫</td>
+                                        <td><strong>বায়ার থেকে পেমেন্ট আদায়:</strong> বায়ার করিম ফ্যাশনস আগের বাকিতে কেনা চালানের বিপরীতে ১৫,০০,০০০ টাকার চেক পরিশোধ করলো যা ডাচ বাংলা ব্যাংকে জমা হলো।</td>
+                                        <td>
+                                            <span class="text-muted small">৪ নং চালানের তৈরি করা <code>Accounts Receivable - Buyers</code> লেজারটিই এখানে ব্যবহৃত হবে। নতুন সেটআপের প্রয়োজন নেই।</span>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Receipt Voucher (RV)</li>
+                                                <li><strong>Main Cash/Bank:</strong> <code>DBBL Bank A/C</code></li>
+                                                <li><strong>Against Account:</strong> <code>Accounts Receivable - Buyers</code></li>
+                                                <li><strong>কস্ট সেন্টার:</strong> N/A</li>
+                                                <li><strong>পার্টি:</strong> <code>Karim Fashion</code> (Buyer) (বাধ্যতামূলক)</li>
+                                                <li><strong>টাকা:</strong> <code>1,500,000</code> BDT</li>
+                                                <li><strong>Narration:</strong> <code>Cheque collection against invoice #INV-001</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 6. Raw Material Purchase from Supplier -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">৬</td>
+                                        <td><strong>বাকিতে সুতা ক্রয়:</strong> সরবরাহকারী রহিম ট্রেডার্সের নিকট থেকে ৮,০০,০০০ টাকার সুতা বাকিতে ফ্যাক্টরি গুদামে গ্রহণ করা হলো।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>১. ইনভেন্টরি লেজার:</strong> কোড <code>1210-001</code>, নাম <code>Raw Material Inventory</code>, টাইপ <code>Asset</code> (প্যারেন্ট: Current Assets).</li>
+                                                <li><strong>২. সাপ্লায়ার লেজার:</strong> কোড <code>2110-001</code>, নাম <code>Accounts Payable - Suppliers</code>, টাইপ <code>Liability</code> (প্যারেন্ট: Current Liabilities).</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Journal Voucher (JV)</li>
+                                                <li><strong>রো ১:</strong> <code>Raw Material Inventory</code> (Dr) | টাকা: <code>800,000</code> | পার্টি: N/A | কস্ট সেন্টার: N/A</li>
+                                                <li><strong>রো ২:</strong> <code>Accounts Payable - Suppliers</code> (Cr) | টাকা: <code>800,000</code> | পার্টি: <code>Rahim Traders</code> (Supplier) | কস্ট সেন্টার: N/A</li>
+                                                <li><strong>Narration:</strong> <code>Cotton yarn purchase on credit from Rahim Traders, Challan #CH-8820</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 7. Payment to Supplier -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">৭</td>
+                                        <td><strong>সাপ্লায়ার বিল পরিশোধ:</strong> সুতা সরবরাহকারী রহিম ট্রেডার্সের পূর্বের ৮,০০,০০০ টাকা বকেয়া বিল ব্যাংক একাউন্টের মাধ্যমে পরিশোধ করা হলো।</td>
+                                        <td>
+                                            <span class="text-muted small">৬ নং চালানে তৈরি করা <code>Accounts Payable - Suppliers</code> লেজারটিই এখানে ব্যবহৃত হবে।</span>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Payment Voucher (PV)</li>
+                                                <li><strong>Main Cash/Bank:</strong> <code>DBBL Bank A/C</code></li>
+                                                <li><strong>Against Account:</strong> <code>Accounts Payable - Suppliers</code></li>
+                                                <li><strong>কস্ট সেন্টার:</strong> N/A</li>
+                                                <li><strong>পার্টি:</strong> <code>Rahim Traders</code> (Supplier) (বাধ্যতামূলক)</li>
+                                                <li><strong>টাকা:</strong> <code>800,000</code> BDT</li>
+                                                <li><strong>Narration:</strong> <code>Settlement payment to Rahim Traders, Challan #CH-8820</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 8. Salaries Integration Setup -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">৮</td>
+                                        <td><strong>মাসিক পেরোল পোস্টিং:</strong> জুন ২০২৬ মাসের কর্মকর্তা ও কর্মচারীদের মোট প্রদেয় বেতন ৫,২০,০০০ টাকা সমন্বয় করা হলো।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>১.</strong> কোড <code>5110-001</code>, নাম <code>Salary Expense</code>, টাইপ <code>Expense</code></li>
+                                                <li><strong>২.</strong> কোড <code>2120-001</code>, নাম <code>PF Liability</code>, টাইপ <code>Liability</code></li>
+                                                <li><strong>৩.</strong> কোড <code>1140-001</code>, নাম <code>Advance Salary</code>, টাইপ <code>Asset</code></li>
+                                                <li><strong>৪.</strong> কোড <code>2130-001</code>, নাম <code>Salary Payable</code>, টাইপ <code>Liability</code></li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <p class="small text-muted mb-1"><code>Manual Payroll Entry Screen</code>-এ গিয়ে নিচের ফর্ম ডাটা সাবমিট দিন:</p>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>Gross Salary:</strong> <code>500000</code> | <strong>Allowances:</strong> <code>50000</code> | <strong>Bonus:</strong> <code>30000</code></li>
+                                                <li><strong>PF Deduction:</strong> <code>40000</code> | <strong>Advance Adjusted:</strong> <code>20000</code> | <strong>Net Payable:</strong> <code>520000</code></li>
+                                                <li>(মোট ডেবিট: ৫,৮০,০০০ BDT = মোট ক্রেডিট: ৫,৮০,০০০ BDT)</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 9. Depreciation JV -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">৯</td>
+                                        <td><strong>মেশিনের মাসিক অবচয়:</strong> কারখানার ভারী সুইং মেশিনারিজের জুন মাসের নির্ধারিত অবচয় বাবদ ২৫,০০০ টাকা হিসাবভুক্তকরণ।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>১. অবচয় খরচ লেজার:</strong> কোড <code>5120-001</code>, নাম <code>Depreciation Expense</code>, টাইপ <code>Expense</code> (প্যারেন্ট: Operating Expenses).</li>
+                                                <li><strong>২. অবচয় সঞ্চিতি লেজার:</strong> কোড <code>1310-002</code>, নাম <code>Accumulated Depreciation - Machinery</code>, টাইপ <code>Asset</code> (প্যারেন্ট: Fixed Assets).</li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Journal Voucher (JV)</li>
+                                                <li><strong>রো ১:</strong> <code>Depreciation Expense</code> (Dr) | টাকা: <code>25000</code> | পার্টি: N/A | কস্ট সেন্টার: <code>Factory Production Unit</code></li>
+                                                <li><strong>রো ২:</strong> <code>Accumulated Depreciation - Machinery</code> (Cr) | টাকা: <code>25000</code> | পার্টি: N/A | কস্ট সেন্টার: N/A</li>
+                                                <li><strong>Narration:</strong> <code>Monthly machinery depreciation expense for factory sewing units</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- 10. Cash to Bank Contra -->
+                                    <tr>
+                                        <td class="text-center font-weight-bold">১০</td>
+                                        <td><strong>ব্যাংক থেকে ক্যাশ উত্তোলন:</strong> খুচরা খরচ নির্বাহের জন্য কোম্পানির ব্যাংক অ্যাকাউন্ট থেকে ৫০,০০০ টাকা নগদ উত্তোলন করে পেটি ক্যাশে রাখা হলো।</td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>১. পেটি ক্যাশ লেজার:</strong> কোড <code>1110-001</code>, নাম <code>Petty Cash Account</code>, টাইপ <code>Asset</code></li>
+                                                <li><strong>২. ব্যাংক লেজার:</strong> কোড <code>1120-005</code>, নাম <code>DBBL Bank A/C</code>, টাইপ <code>Asset</code></li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <ul class="pl-3 mb-0 small text-muted">
+                                                <li><strong>ভাউচার টাইপ:</strong> Journal Voucher (JV) or Contra Voucher</li>
+                                                <li><strong>রো ১:</strong> <code>Petty Cash Account</code> (Dr) | টাকা: <code>50000</code> | পার্টি: N/A | কস্ট সেন্টার: N/A</li>
+                                                <li><strong>রো ২:</strong> <code>DBBL Bank A/C</code> (Cr) | টাকা: <code>50000</code> | পার্টি: N/A | কস্ট সেন্টার: N/A</li>
+                                                <li><strong>Narration:</strong> <code>Petty cash replenishment - cash withdrawn from DBBL</code></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
