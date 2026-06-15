@@ -304,6 +304,121 @@
 
         .pk-indicator { color: #f59e0b; font-weight: bold; }
         .fk-indicator { color: #3b82f6; font-weight: bold; }
+
+        /* ─── Module Tutorial Enhancements ─────────────────────────── */
+
+        /* Alert-style callout boxes (like GitHub markdown alerts) */
+        .alert-callout {
+            border-left: 4px solid;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+        }
+        .alert-callout-important {
+            border-left-color: #f59e0b;
+            background-color: #fffbeb;
+            color: #78350f;
+        }
+        .alert-callout-important .callout-title { color: #d97706; font-weight: 700; margin-bottom: 4px; }
+        .alert-callout-note {
+            border-left-color: #3b82f6;
+            background-color: #eff6ff;
+            color: #1e3a8a;
+        }
+        .alert-callout-note .callout-title { color: #2563eb; font-weight: 700; margin-bottom: 4px; }
+        .alert-callout-tip {
+            border-left-color: #10b981;
+            background-color: #ecfdf5;
+            color: #064e3b;
+        }
+        .alert-callout-tip .callout-title { color: #059669; font-weight: 700; margin-bottom: 4px; }
+
+        /* COA Mandatory Validation Table */
+        .coa-mandatory-table thead th {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+            color: #fff;
+            font-weight: 600;
+            font-size: 12.5px;
+            border-bottom: none;
+            vertical-align: middle;
+        }
+        .coa-mandatory-table thead th small { opacity: 0.75; }
+        .coa-mandatory-table tbody tr:hover { background-color: #f0fdfa; }
+        .coa-mandatory-table .keyword-cell code {
+            background-color: #1e3a5f;
+            color: #a7f3d0;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 11.5px;
+            display: inline-block;
+            margin-bottom: 2px;
+        }
+        .coa-mandatory-table .keyword-cell small { font-size: 10.5px; color: #94a3b8; }
+
+        /* Dark journal entry preview block */
+        .journal-preview {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.9;
+            border-left: 4px solid #0d9488;
+        }
+        .journal-preview .dr  { color: #f87171; font-weight: bold; }
+        .journal-preview .cr  { color: #34d399; font-weight: bold; }
+        .journal-preview .arr { color: #64748b; }
+
+        /* Transaction type selection cards */
+        .trans-type-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px 12px;
+            text-align: center;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+        .trans-type-card:hover {
+            border-color: #0d9488;
+            background-color: #f0fdfa;
+            box-shadow: 0 4px 12px rgba(13,148,136,0.15);
+        }
+
+        /* Reconciliation formula block */
+        .recon-formula {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 13px;
+            line-height: 2;
+            color: #1e293b;
+        }
+        .recon-formula .recon-total { border-top: 1px solid #94a3b8; font-weight: bold; }
+        .recon-formula .recon-success { color: #059669; font-weight: bold; }
+
+        /* Developer seeder code block */
+        .seeder-block {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            border-radius: 8px;
+            padding: 18px 20px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            overflow-x: auto;
+            border: 1px solid #30363d;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .seeder-block .php-comment  { color: #8b949e; }
+        .seeder-block .php-keyword  { color: #ff7b72; }
+        .seeder-block .php-string   { color: #a5d6ff; }
+        .seeder-block .php-variable { color: #ffa657; }
+        .seeder-block .php-method   { color: #79c0ff; }
+        .seeder-block .php-section  { color: #ffd700; font-weight: bold; }
     </style>
 @endpush
 
@@ -326,6 +441,8 @@
                         <span class="btn quick-badge btn-sm mr-2 mb-2 px-3 quick-link-btn" data-target="section-cashbank">Receipt & Payment</span>
                         <span class="btn quick-badge btn-sm mr-2 mb-2 px-3 quick-link-btn" data-target="section-recon">Bank Reconciliation</span>
                         <span class="btn quick-badge btn-sm mr-2 mb-2 px-3 quick-link-btn" data-target="section-decision">লেজার সিলেকশন গাইড</span>
+                        <span class="btn quick-badge btn-sm mr-2 mb-2 px-3 quick-link-btn" data-target="section-payroll">Payroll Module</span>
+                        <span class="btn quick-badge btn-sm mr-2 mb-2 px-3 quick-link-btn" data-target="section-inventory">Inventory Journal</span>
                     </div>
                 </div>
                 <div class="col-lg-4 mt-4 mt-lg-0">
@@ -369,8 +486,10 @@
                     <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-register"><i class="fa fa-list-ol"></i>Voucher Register</span>
                     <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-recon"><i class="fa fa-sync-alt"></i>Bank Reconciliation</span>
                     
-                    <div class="list-group-item bg-light text-uppercase font-weight-bold small text-muted px-3 py-2">ইন্টিগ্রেশন ও অটো পোস্টিং</div>
-                    <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-bridges"><i class="fa fa-link"></i>Inventory, Payroll & LC Bridges</span>
+                    <div class="list-group-item bg-light text-uppercase font-weight-bold small text-muted px-3 py-2">মডিউল টিউটোরিয়াল (Module Tutorials)</div>
+                    <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-payroll"><i class="fa fa-calculator"></i>Payroll Management</span>
+                    <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-inventory"><i class="fa fa-boxes"></i>Inventory Financial Journal</span>
+                    <span class="list-group-item list-group-item-action doc-nav-item" data-target="section-lc"><i class="fa fa-ship"></i>Commercial LC Tracker</span>
                     
                     <div class="list-group-item bg-light text-uppercase font-weight-bold small text-muted px-3 py-2">অ্যাকাউন্টিং ডিশিশন গাইড</div>
                     <span class="list-group-item list-group-item-action doc-nav-item text-success font-weight-bold" data-target="section-decision"><i class="fa fa-exchange-alt"></i>লেজার সিলেকশন ডিশিশন ট্রি</span>
@@ -1112,19 +1231,100 @@
                         <span class="badge badge-success badge-custom">Daily Operations</span>
                     </div>
                     <div class="card-body">
-                        <h4 class="h6 font-weight-bold text-dark">এই মডিউলের কাজ:</h4>
-                        <p class="text-muted">
-                            কোম্পানির লেজার বুক ব্যালেন্স এবং ব্যাংকের বাস্তব পাসবুকের ব্যালেন্স মেলাতে এটি ব্যবহৃত হয়।
-                        </p>
-                        
-                        <div class="border rounded p-3 bg-light mb-4">
-                            <h5 class="h6 font-weight-bold text-primary"><i class="fa fa-info-circle"></i> গুরুত্বপূর্ণ ব্যবহারের নিয়ম:</h5>
-                            <p class="small text-muted mb-0">
-                                <strong>ব্যাংক রিকনসিলিয়েশন স্ক্রিনটি নতুন কোনো জার্নাল এন্ট্রি তৈরি করে না।</strong> আপনাকে প্রথমে ক্যাশ ও ব্যাংক ভাউচার স্ক্রিন থেকে পোস্টিং দিতে হবে। পোস্টিং দেওয়ার পর ব্যাংক থেকে পাওয়া আসল স্টেটমেন্ট এখানে লোড করে ইন্টারনাল ভাউচারের সাথে ম্যাচিং বক্সে ক্লিক করে মেলাতে হবে।
-                            </p>
+
+                        <div class="alert-callout alert-callout-important mb-4">
+                            <strong>গুরুত্বপূর্ণ:</strong> ব্যাংক রিকনসিলিয়েশন স্ক্রিনটি <strong>নতুন কোনো জার্নাল এন্ট্রি তৈরি করে না।</strong>
+                            প্রথমে Cash &amp; Bank Voucher স্ক্রিন থেকে পোস্টিং দিন, তারপর এখানে ব্যাংক স্টেটমেন্টের সাথে মেলান।
+                            COA-তে <code>bank</code> কীওয়ার্ড যুক্ত Asset অ্যাকাউন্ট না থাকলে এই মডিউল সক্রিয় হবে না।
                         </div>
 
-                        <h4 class="h6 font-weight-bold text-dark mt-4">রিকনসিলিয়েশনের ধাপসমূহ (Step-by-Step SOP):</h4>
+                        <h5 class="font-weight-bold text-success mt-4 mb-3"><i class="fa fa-keyboard mr-2"></i>ডেটা এন্ট্রি ফিল্ড (Data Entry Steps)</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Field Name</th>
+                                        <th>বাংলা নাম</th>
+                                        <th>Required</th>
+                                        <th>নির্দেশনা</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>Bank Account</td><td>ব্যাংক অ্যাকাউন্ট</td><td><span class="badge badge-danger">Required</span></td><td>COA থেকে <em>bank</em> কীওয়ার্ড যুক্ত Asset লেজার সিলেক্ট করুন</td></tr>
+                                    <tr><td>2</td><td>Statement Period (From)</td><td>স্টেটমেন্ট শুরুর তারিখ</td><td><span class="badge badge-danger">Required</span></td><td>ব্যাংক স্টেটমেন্টের প্রথম তারিখ</td></tr>
+                                    <tr><td>3</td><td>Statement Period (To)</td><td>স্টেটমেন্ট শেষ তারিখ</td><td><span class="badge badge-danger">Required</span></td><td>ব্যাংক স্টেটমেন্টের শেষ তারিখ</td></tr>
+                                    <tr><td>4</td><td>Bank Statement (Upload / Manual)</td><td>ব্যাংক স্টেটমেন্ট</td><td><span class="badge badge-danger">Required</span></td><td>CSV আপলোড বা ম্যানুয়াল এন্ট্রি — প্রতি লাইনে তারিখ, বিবরণ, পরিমাণ</td></tr>
+                                    <tr><td>5</td><td>Reference / Cheque No.</td><td>রেফারেন্স নম্বর</td><td><span class="badge badge-warning">Recommended</span></td><td>চেক নম্বর বা ট্রান্সফার রেফ — ম্যাচিং নির্ভুলতা বাড়ায়</td></tr>
+                                    <tr><td>6</td><td>Manual Override</td><td>ম্যানুয়াল ম্যাচ</td><td><span class="badge badge-secondary">Optional</span></td><td>অটো-ম্যাচ না হলে বাম ও ডান পাশ থেকে ম্যানুয়ালি টিক দিয়ে মেলানো যাবে</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-success mt-4 mb-3"><i class="fa fa-cogs mr-2"></i>অটো-ম্যাচিং লজিক (System Matching Rules)</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead style="background:#1e3a5f; color:#fff;">
+                                    <tr>
+                                        <th>Matching Criterion</th>
+                                        <th>Tolerance / Rule</th>
+                                        <th>Priority</th>
+                                        <th>বিবরণ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Amount Match</td><td>± ০.০১ টাকা</td><td><span class="badge badge-danger">High</span></td><td>বই ও ব্যাংকের পরিমাণ অবশ্যই মিলতে হবে (রাউন্ডিং ০.০১ পর্যন্ত গ্রহণযোগ্য)</td></tr>
+                                    <tr><td>Date Proximity</td><td>± ৩ দিন</td><td><span class="badge badge-warning">Medium</span></td><td>চেক ইস্যু ও ক্লিয়ারিং তারিখের ব্যবধান ৩ দিনের মধ্যে হলে ম্যাচ হবে</td></tr>
+                                    <tr><td>Reference Code</td><td>Exact or Partial</td><td><span class="badge badge-success">Boost</span></td><td>চেক নম্বর / ট্রান্সফার রেফ মিললে ম্যাচিং স্কোর বৃদ্ধি পাবে</td></tr>
+                                    <tr><td>Manual Override</td><td>User Confirmed</td><td><span class="badge badge-secondary">Fallback</span></td><td>অটো-ম্যাচ ব্যর্থ হলে ইউজার নিজে দুটি এন্ট্রি টিক দিয়ে ম্যাচ করবেন</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-success mt-4 mb-3"><i class="fa fa-calculator mr-2"></i>রিকনসিলিয়েশন সামারি ফর্মুলা</h5>
+                        <div class="recon-formula mb-4">
+                            <div><strong>Book Balance (লেজার ব্যালেন্স)</strong></div>
+                            <div class="formula-line">+ Deposits in Transit (ট্রানজিটে জমা)</div>
+                            <div class="formula-line">− Outstanding Cheques (অনাদায়ী চেক)</div>
+                            <div class="formula-sep">══════════════════════════════════</div>
+                            <div class="formula-result"><strong>= Adjusted Book Balance</strong></div>
+                            <div class="mt-2"><strong>Bank Statement Balance</strong></div>
+                            <div class="formula-line">± Bank Errors / Bank Charges</div>
+                            <div class="formula-sep">══════════════════════════════════</div>
+                            <div class="formula-result"><strong>= Adjusted Bank Balance</strong></div>
+                            <div class="formula-sep mt-2">──────────────────────────────────</div>
+                            <div class="formula-result text-success"><strong>Difference = 0 ✔ (Reconciled)</strong></div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>বাধ্যতামূলক COA রেকর্ড (Bank Tracker)</h5>
+                        <div class="table-responsive">
+                            <table class="coa-mandatory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Account Purpose</th>
+                                        <th>Mandatory Keyword / Pattern</th>
+                                        <th>System Account Type</th>
+                                        <th>Production Example Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ব্যাংক লেজার (Bank Ledger)</td>
+                                        <td><span class="keyword-cell">bank</span></td>
+                                        <td>Asset</td>
+                                        <td>Dutch Bangla Bank – Current A/C</td>
+                                    </tr>
+                                    <tr>
+                                        <td>নগদ হাতে (Cash In Hand)</td>
+                                        <td><span class="keyword-cell">cash</span></td>
+                                        <td>Asset</td>
+                                        <td>Cash In Hand</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="h6 font-weight-bold text-dark mt-4">রিকনসিলিয়েশনের ধাপসমূহ (Step-by-Step SOP):</h4>
                         <div class="flow-container py-4">
                             <div class="flow-node">ধাপ ১: ব্যাংক লেনদেনের ভাউচার পোস্ট করুন (PV/RV)</div>
                             <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
@@ -1134,57 +1334,292 @@
                             <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
                             <div class="flow-node">ধাপ ৪: ডান পাশ থেকে ব্যাংক স্টেটমেন্ট এন্ট্রি সিলেক্ট করুন (টিক দিন)</div>
                             <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
-                            <div class="flow-node text-white" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); border-color: #0f172a;">ধাপ ৫: সিস্টেম স্বয়ংক্রিয়ভাবে রিকনসিল বা ম্যাচ সম্পন্ন করবে</div>
+                            <div class="flow-node text-white" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); border-color: #0f172a;">ধাপ ৫: সিস্টেম স্বয়ংক্রিয়ভাবে রিকনসিল বা ম্যাচ সম্পন্ন করবে</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SECTION: Integration Bridges -->
-            <div id="section-bridges" class="doc-section">
+            <!-- SECTION: Payroll Management -->
+            <div id="section-payroll" class="doc-section">
                 <div class="card card-custom">
                     <div class="card-custom-header d-flex justify-content-between align-items-center">
-                        <h2 class="h4 mb-0 text-primary font-weight-bold">১১. Integration Bridges (অন্যান্য ইন্টিগ্রেশন মডিউল)</h2>
-                        <span class="badge badge-success badge-custom">Bridges</span>
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">১১. Payroll Management (পেরোল ম্যানেজমেন্ট)</h2>
+                        <span class="badge badge-warning badge-custom">Payroll Module</span>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-4 mb-3">
-                                <div class="border rounded p-3 h-100 bg-white shadow-sm">
-                                    <h5 class="h6 font-weight-bold text-info"><i class="fa fa-box mr-2"></i>ম্যানুয়াল ইনভেন্টরি পোস্টিং</h5>
-                                    <p class="small text-muted">
-                                        স্টোর বা ফ্যাক্টরি ইনভেন্টরির আর্থিক প্রভাব ম্যানুয়ালি পোস্টিং করতে এটি ব্যবহৃত হয়।
-                                    </p>
-                                    <ul class="small pl-3 text-muted">
-                                        <li><strong>Material Purchase:</strong> কাঁচামাল সরাসরি ক্রয়ের সময় ইনভেন্টরি ডেবিট ও সাপ্লায়ার ক্রেডিট করে।</li>
-                                        <li><strong>Issue to Production (WIP):</strong> কাঁচামাল উৎপাদনে পাঠানোর সময় প্রজেক্ট/স্টাইল কস্ট সেন্টার সিলেক্ট করা বাধ্যতামূলক।</li>
-                                    </ul>
+
+                        <div class="alert-callout alert-callout-important mb-4">
+                            <strong>গুরুত্বপূর্ণ:</strong> মাসের শেষ দিনে (Last Day of Month) পেরোল পোস্টিং করতে হবে।
+                            পোস্টিং ডেটা <strong>Payroll → Monthly Salary Sheet</strong> থেকে স্বয়ংক্রিয়ভাবে লোড হয়।
+                            ম্যানুয়াল জার্নাল এন্ট্রির আগে সেলারি শিট <em>Approved</em> অবস্থায় থাকা বাধ্যতামূলক।
+                        </div>
+
+                        <h5 class="font-weight-bold text-warning mt-4 mb-3"><i class="fa fa-keyboard mr-2"></i>ধাপে ধাপে ডেটা এন্ট্রি (Data Entry Steps)</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Field Name</th>
+                                        <th>বাংলা নাম</th>
+                                        <th>Required</th>
+                                        <th>নির্দেশনা</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>Voucher Date</td><td>ভাউচার তারিখ</td><td><span class="badge badge-danger">Required</span></td><td>মাসের শেষ তারিখ দিতে হবে, যেমন: <code>2024-06-30</code></td></tr>
+                                    <tr><td>2</td><td>Salary Month</td><td>বেতন মাস</td><td><span class="badge badge-danger">Required</span></td><td>Dropdown থেকে সঠিক মাস সিলেক্ট করুন</td></tr>
+                                    <tr><td>3</td><td>Department / Cost Centre</td><td>বিভাগ</td><td><span class="badge badge-danger">Required</span></td><td>Factory / Admin / Commercial বিভাগ আলাদাভাবে পোস্ট করুন</td></tr>
+                                    <tr><td>4</td><td>Salary Expense Account</td><td>বেতন ব্যয় লেজার</td><td><span class="badge badge-danger">Required</span></td><td>COA থেকে <em>salary expense</em> কীওয়ার্ড যুক্ত Expense অ্যাকাউন্ট বেছে নিন</td></tr>
+                                    <tr><td>5</td><td>PF Liability Account</td><td>প্রভিডেন্ট ফান্ড দায়</td><td><span class="badge badge-warning">Conditional</span></td><td>PF প্রযোজ্য হলে <em>provident fund</em> / <em>pf liability</em> কীওয়ার্ড যুক্ত Liability অ্যাকাউন্ট</td></tr>
+                                    <tr><td>6</td><td>Advance Deduction Account</td><td>অগ্রিম কর্তন</td><td><span class="badge badge-warning">Conditional</span></td><td>অগ্রিম থাকলে <em>advance salary</em> কীওয়ার্ড যুক্ত Asset অ্যাকাউন্ট বেছে নিন</td></tr>
+                                    <tr><td>7</td><td>Salary Payable Account</td><td>প্রদেয় বেতন</td><td><span class="badge badge-danger">Required</span></td><td>নেট প্রদেয় টাকার জন্য <em>salary payable</em> কীওয়ার্ড যুক্ত Liability অ্যাকাউন্ট</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-warning mt-4 mb-3"><i class="fa fa-book-open mr-2"></i>জার্নাল এন্ট্রি প্রিভিউ (Journal Preview)</h5>
+                        <div class="journal-preview mb-4">
+                            <span class="arr">★ Payroll Journal — June 2024 (Factory Dept)</span><br>
+                            <span class="dr">  Dr.  Salary Expense – Factory          120,000.00</span><br>
+                            <span class="cr">    Cr.  PF Liability – Staff                 4,800.00</span><br>
+                            <span class="cr">    Cr.  Advance Salary – Workers             8,500.00</span><br>
+                            <span class="cr">    Cr.  Salary Payable – Current Month     106,700.00</span><br>
+                            <span class="arr">  ─────────────────────────────────────────────────</span><br>
+                            <span class="arr">  Total Dr = Total Cr = 120,000.00  ✔ Balanced</span>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>বাধ্যতামূলক COA রেকর্ড (Mandatory COA Validation)</h5>
+                        <div class="table-responsive">
+                            <table class="coa-mandatory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Account Purpose</th>
+                                        <th>Mandatory Keyword / Pattern</th>
+                                        <th>System Account Type</th>
+                                        <th>Production Example Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>বেতন ব্যয় (Salary Expense)</td>
+                                        <td><span class="keyword-cell">salary expense</span></td>
+                                        <td>Expense</td>
+                                        <td>Salary Expense – Factory</td>
+                                    </tr>
+                                    <tr>
+                                        <td>প্রভিডেন্ট ফান্ড দায় (PF Liability)</td>
+                                        <td><span class="keyword-cell">provident fund</span> বা <span class="keyword-cell">pf liability</span></td>
+                                        <td>Liability</td>
+                                        <td>PF Liability – Staff</td>
+                                    </tr>
+                                    <tr>
+                                        <td>অগ্রিম বেতন (Advance Salary)</td>
+                                        <td><span class="keyword-cell">advance salary</span></td>
+                                        <td>Asset</td>
+                                        <td>Advance Salary – Workers</td>
+                                    </tr>
+                                    <tr>
+                                        <td>প্রদেয় বেতন (Salary Payable)</td>
+                                        <td><span class="keyword-cell">salary payable</span></td>
+                                        <td>Liability</td>
+                                        <td>Salary Payable – Current Month</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: Inventory Financial Journal -->
+            <div id="section-inventory" class="doc-section">
+                <div class="card card-custom">
+                    <div class="card-custom-header d-flex justify-content-between align-items-center">
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">১২. Inventory Financial Journal (ইনভেন্টরি আর্থিক জার্নাল)</h2>
+                        <span class="badge badge-info badge-custom">Inventory Module</span>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="alert-callout alert-callout-note mb-4">
+                            <strong>নোট:</strong> ইনভেন্টরি জার্নাল পোস্টিং ৩টি ট্রান্জ্যাকশন টাইপে বিভক্ত।
+                            প্রতিটি টাইপের জন্য ভিন্ন অ্যাকাউন্ট সেটআপ প্রয়োজন।
+                            <strong>Transaction Type</strong> সিলেক্ট করলে ফর্মের ফিল্ড স্বয়ংক্রিয়ভাবে পরিবর্তন হবে।
+                        </div>
+
+                        <h5 class="font-weight-bold text-info mt-3 mb-3"><i class="fa fa-th-large mr-2"></i>Transaction Type নির্বাচন করুন</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="trans-type-card">
+                                    <h6 class="font-weight-bold text-success mb-1"><i class="fa fa-shopping-cart mr-1"></i> Material Purchase</h6>
+                                    <p class="small text-muted mb-0">কাঁচামাল ক্রয় — ইনভেন্টরি ডেবিট, সাপ্লায়ার ক্রেডিট</p>
                                 </div>
                             </div>
-                            <div class="col-lg-4 mb-3">
-                                <div class="border rounded p-3 h-100 bg-white shadow-sm">
-                                    <h5 class="h6 font-weight-bold text-warning"><i class="fa fa-calculator mr-2"></i>ম্যানুয়াল পেরোল পোস্টিং</h5>
-                                    <p class="small text-muted">
-                                        মাসের শেষ দিনে মোট বেতন ও ভাতার একটি সমন্বিত জার্নাল ভাউচার এক ক্লিকে তৈরি করতে সাহায্য করে।
-                                    </p>
-                                    <ul class="small pl-3 text-muted">
-                                        <li><strong>ডেবিট গ্রুপ:</strong> বেসিক স্যালারি + মোট এলাউন্স + মোট বোনাস।</li>
-                                        <li><strong>ক্রেডিট গ্রুপ:</strong> অগ্রিম কর্তন + প্রভিডেন্ট ফান্ড কর্তন + নেট প্রদেয় টাকা।</li>
-                                    </ul>
+                            <div class="col-md-4 mb-3">
+                                <div class="trans-type-card">
+                                    <h6 class="font-weight-bold text-warning mb-1"><i class="fa fa-industry mr-1"></i> Issue to Production</h6>
+                                    <p class="small text-muted mb-0">উৎপাদনে পাঠানো — WIP ডেবিট, ইনভেন্টরি ক্রেডিট</p>
                                 </div>
                             </div>
-                            <div class="col-lg-4 mb-3">
-                                <div class="border rounded p-3 h-100 bg-white shadow-sm">
-                                    <h5 class="h6 font-weight-bold text-success"><i class="fa fa-ship mr-2"></i>কমার্শিয়াল এলসি ট্র্যাকার</h5>
-                                    <p class="small text-muted">
-                                        আমদানি ও রপ্তানি সংক্রান্ত ব্যাংক এলসি-র ব্যাংক মার্জিন ব্যালেন্স, এলসি কমিশন ও ডেবিট লায়াবিলিটি সরাসরি মনিটর করে।
-                                    </p>
-                                    <ul class="small pl-3 text-muted">
-                                        <li><strong>Snapshot View:</strong> এলসি নং সিলেক্ট করলে ঐ এলসির ব্যাংক চার্জ, ক্লিয়ারিং খরচ ও কাস্টমস ডিউটি রিপোর্ট লোড করে।</li>
-                                    </ul>
+                            <div class="col-md-4 mb-3">
+                                <div class="trans-type-card">
+                                    <h6 class="font-weight-bold text-danger mb-1"><i class="fa fa-balance-scale mr-1"></i> Inventory Adjustment</h6>
+                                    <p class="small text-muted mb-0">স্টক এডজাস্টমেন্ট — লস/গেইন রেকর্ড করা হয়</p>
                                 </div>
                             </div>
                         </div>
+
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-keyboard mr-2"></i>ডেটা এন্ট্রি ফিল্ড (Data Entry Fields)</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Field Name</th>
+                                        <th>বাংলা নাম</th>
+                                        <th>Trans Type</th>
+                                        <th>নির্দেশনা</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>Voucher Date</td><td>ভাউচার তারিখ</td><td>All</td><td>ক্রয়/ইস্যু/এডজাস্টমেন্টের প্রকৃত তারিখ</td></tr>
+                                    <tr><td>2</td><td>Transaction Type</td><td>লেনদেনের ধরন</td><td>All</td><td>Material Purchase / Issue to Production / Inventory Adjustment</td></tr>
+                                    <tr><td>3</td><td>Item / Product</td><td>পণ্য</td><td>All</td><td>Inventory Item List থেকে সিলেক্ট করুন</td></tr>
+                                    <tr><td>4</td><td>Quantity</td><td>পরিমাণ</td><td>All</td><td>ইউনিট অনুযায়ী পরিমাণ লিখুন</td></tr>
+                                    <tr><td>5</td><td>Unit Cost</td><td>একক মূল্য</td><td>Purchase, Adj.</td><td>প্রতি ইউনিটের ক্রয় মূল্য</td></tr>
+                                    <tr><td>6</td><td>Inventory Account (Dr/Cr)</td><td>ইনভেন্টরি লেজার</td><td>All</td><td><em>inventory</em> বা <em>raw material</em> কীওয়ার্ড যুক্ত Asset অ্যাকাউন্ট</td></tr>
+                                    <tr><td>7</td><td>Supplier Payable Account</td><td>সাপ্লায়ার দায়</td><td>Purchase</td><td><em>supplier payable</em> কীওয়ার্ড যুক্ত Liability অ্যাকাউন্ট</td></tr>
+                                    <tr><td>8</td><td>WIP Account</td><td>প্রক্রিয়াধীন উৎপাদন</td><td>Issue to Production</td><td><em>work in progress</em> বা <em>wip</em> কীওয়ার্ড যুক্ত Asset অ্যাকাউন্ট</td></tr>
+                                    <tr><td>9</td><td>Adjustment Account</td><td>এডজাস্টমেন্ট লেজার</td><td>Adjustment</td><td><em>inventory adjustment</em> কীওয়ার্ড যুক্ত Expense অ্যাকাউন্ট</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-book-open mr-2"></i>জার্নাল প্রিভিউ — তিনটি ট্রান্জ্যাকশন টাইপ</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="journal-preview" style="font-size:0.75rem;">
+                                    <span class="arr">★ Material Purchase</span><br>
+                                    <span class="dr">  Dr.  Raw Material Inventory   50,000</span><br>
+                                    <span class="cr">    Cr.  Supplier Payable – Local 50,000</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="journal-preview" style="font-size:0.75rem;">
+                                    <span class="arr">★ Issue to Production</span><br>
+                                    <span class="dr">  Dr.  WIP – Cutting Section     30,000</span><br>
+                                    <span class="cr">    Cr.  Raw Material Inventory   30,000</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="journal-preview" style="font-size:0.75rem;">
+                                    <span class="arr">★ Inventory Adjustment (Loss)</span><br>
+                                    <span class="dr">  Dr.  Inventory Adjustment Loss  2,000</span><br>
+                                    <span class="cr">    Cr.  Raw Material Inventory    2,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>বাধ্যতামূলক COA রেকর্ড (Mandatory COA Validation)</h5>
+                        <div class="table-responsive">
+                            <table class="coa-mandatory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Account Purpose</th>
+                                        <th>Mandatory Keyword / Pattern</th>
+                                        <th>System Account Type</th>
+                                        <th>Production Example Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>কাঁচামাল ইনভেন্টরি</td>
+                                        <td><span class="keyword-cell">raw material</span> বা <span class="keyword-cell">inventory</span></td>
+                                        <td>Asset</td>
+                                        <td>Raw Material Inventory – Fabric</td>
+                                    </tr>
+                                    <tr>
+                                        <td>সাপ্লায়ার দায় (Supplier Payable)</td>
+                                        <td><span class="keyword-cell">supplier payable</span></td>
+                                        <td>Liability</td>
+                                        <td>Supplier Payable – Local</td>
+                                    </tr>
+                                    <tr>
+                                        <td>প্রক্রিয়াধীন উৎপাদন (WIP)</td>
+                                        <td><span class="keyword-cell">work in progress</span> বা <span class="keyword-cell">wip</span></td>
+                                        <td>Asset</td>
+                                        <td>WIP – Cutting Section</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ইনভেন্টরি এডজাস্টমেন্ট লস</td>
+                                        <td><span class="keyword-cell">inventory adjustment</span></td>
+                                        <td>Expense</td>
+                                        <td>Inventory Adjustment Loss</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: Commercial LC Tracker -->
+            <div id="section-lc" class="doc-section">
+                <div class="card card-custom">
+                    <div class="card-custom-header d-flex justify-content-between align-items-center">
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">১৩. Commercial Bank / LC Tracker (কমার্শিয়াল ব্যাংক ট্র্যাকার)</h2>
+                        <span class="badge badge-success badge-custom">LC Module</span>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="alert-callout alert-callout-tip mb-4">
+                            <strong>টিপস:</strong> এলসি নম্বর সিলেক্ট করলে সংশ্লিষ্ট ব্যাংক চার্জ, মার্জিন ব্যালেন্স ও ক্লিয়ারিং খরচ স্বয়ংক্রিয়ভাবে লোড হয়।
+                            শুধুমাত্র <strong>COA-তে ব্যাংক অ্যাকাউন্ট</strong> (কীওয়ার্ড: <code>bank</code>) সেটআপ থাকলে এই মডিউল সক্রিয় হবে।
+                        </div>
+
+                        <h5 class="font-weight-bold mt-3 mb-3"><i class="fa fa-ship mr-2"></i>LC Charge Types ও COA ম্যাপিং</h5>
+                        <div class="table-responsive">
+                            <table class="coa-mandatory-table">
+                                <thead>
+                                    <tr>
+                                        <th>LC Charge Type</th>
+                                        <th>Mandatory Keyword / Pattern</th>
+                                        <th>System Account Type</th>
+                                        <th>Production Example Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ব্যাংক মার্জিন (Bank Margin)</td>
+                                        <td><span class="keyword-cell">bank margin</span> বা <span class="keyword-cell">lc margin</span></td>
+                                        <td>Asset</td>
+                                        <td>LC Margin – Dutch Bangla Bank</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ব্যাংক কমিশন (LC Commission)</td>
+                                        <td><span class="keyword-cell">lc commission</span> বা <span class="keyword-cell">bank commission</span></td>
+                                        <td>Expense</td>
+                                        <td>LC Commission Expense</td>
+                                    </tr>
+                                    <tr>
+                                        <td>কাস্টমস ডিউটি (Customs Duty)</td>
+                                        <td><span class="keyword-cell">customs duty</span> বা <span class="keyword-cell">import duty</span></td>
+                                        <td>Expense</td>
+                                        <td>Customs Duty – Import</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ক্লিয়ারিং চার্জ (Clearing Charges)</td>
+                                        <td><span class="keyword-cell">clearing charge</span> বা <span class="keyword-cell">clearing expense</span></td>
+                                        <td>Expense</td>
+                                        <td>Port Clearing Charges</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -1615,61 +2050,194 @@
                         <span class="badge badge-danger badge-custom">FAQ & Help</span>
                     </div>
                     <div class="card-body">
-                        <!-- Common Mistakes -->
-                        <h4 class="h6 font-weight-bold text-danger mb-3"><i class="fa fa-exclamation-triangle"></i> সচরাচর ইউজাররা যে সমস্ত ভুল করতে পারেন:</h4>
-                        
-                        <div class="mb-3">
-                            <div class="font-weight-bold text-dark">১. সমস্যা: "Voucher submission blocked (period closed)" মেসেজ দেখাচ্ছে।</div>
-                            <div class="text-muted small"><strong>সমাধান:</strong> ভাউচারটি যে তারিখের তা বন্ধ (Closed) অর্থ বছরে বা মাসে পড়েছে। <code>Tax Rates & Financial Periods</code> স্ক্রিনে গিয়ে ঐ মাসের স্ট্যাটাস চেক করে 'Open' করুন।</div>
+
+                        <h5 class="font-weight-bold text-danger mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>সচরাচর সমস্যা ও সমাধান (Error Reference Table)</h5>
+                        <div class="table-responsive mb-5">
+                            <table class="table table-sm table-bordered">
+                                <thead style="background:#7f1d1d; color:#fff;">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Error / সমস্যা</th>
+                                        <th>Root Cause</th>
+                                        <th>সমাধান</th>
+                                        <th>Affected Module</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><code>Voucher submission blocked (period closed)</code></td>
+                                        <td>ভাউচারের তারিখ বন্ধ অর্থবছর বা মাসে পড়েছে</td>
+                                        <td><strong>Tax Rates &amp; Financial Periods</strong> স্ক্রিনে গিয়ে ঐ মাসের স্ট্যাটাস <em>Open</em> করুন</td>
+                                        <td>All Vouchers</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Cost Center dropdown আসছে না</td>
+                                        <td>সিলেক্ট করা লেজারের টাইপ <code>Expense</code> নয়</td>
+                                        <td>COA-তে লেজারের Account Type পুনরায় <code>Expense</code> নির্ধারণ করুন</td>
+                                        <td>Payment Voucher</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Bank Reconciliation-এ বুক এন্ট্রি পাওয়া যাচ্ছে না</td>
+                                        <td>Cash &amp; Bank Voucher থেকে পোস্টিং দেওয়া হয়নি</td>
+                                        <td>Cash &amp; Bank Voucher ফর্মে গিয়ে আগে পোস্টিং দিন, তারপর রিকনসিলিয়েশনে আসুন</td>
+                                        <td>Bank Reconciliation</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><code>Required payroll ledger accounts were not found.</code></td>
+                                        <td>COA-তে Payroll-এর ৪টি mandatory লেজার নেই বা নাম/টাইপ ভুল</td>
+                                        <td>নিচের COA Seeder রান করুন বা ম্যানুয়ালি ৪টি লেজার তৈরি করুন (keyword + type অবশ্যই মিলতে হবে)</td>
+                                        <td>Payroll Posting</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td><code>Required inventory ledger accounts were not found.</code></td>
+                                        <td>COA-তে Inventory-এর mandatory লেজার (raw material / supplier payable / wip) অনুপস্থিত</td>
+                                        <td>নিচের COA Seeder রান করুন বা Inventory COA table অনুযায়ী লেজার তৈরি করুন</td>
+                                        <td>Inventory Journal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <hr>
-                        <div class="mb-3">
-                            <div class="font-weight-bold text-dark">২. সমস্যা: পেমেন্ট ভাউচারে খরচ লেজার সিলেক্ট করার পর Cost Center ড্রপডাউন আসছে না বা ইনপুট নিচ্ছে না।</div>
-                            <div class="text-muted small"><strong>সমাধান:</strong> আপনি যে লেজারটি সিলেক্ট করেছেন তার টাইপ <code>Expense</code> নয়। COA তে লেজারের ক্যাটাগরি পুনরায় চেক করে Expense নির্ধারণ করুন।</div>
+
+                        <h5 class="font-weight-bold text-info mb-3"><i class="fa fa-database mr-2"></i>Laravel COA Seeder — সকল Mandatory রেকর্ড</h5>
+                        <div class="alert-callout alert-callout-note mb-3">
+                            <strong>নোট:</strong> নিচের Seeder টি Production এ একবার রান করলে সকল mandatory COA রেকর্ড <code>updateOrInsert</code> দিয়ে নিরাপদে তৈরি হবে।
+                            বিদ্যমান রেকর্ড থাকলে আপডেট হবে, না থাকলে তৈরি হবে।
                         </div>
-                        <hr>
-                        <div class="mb-3">
-                            <div class="font-weight-bold text-dark">৩. সমস্যা: বায়ার বা কাস্টমারের টাকা ব্যাংকে জমা হলেও ব্যাংক রিকনসিলিয়েশন করার সময় বুক এন্ট্রিটি খুঁজে পাওয়া যাচ্ছে না।</div>
-                            <div class="text-muted small"><strong>সমাধান:</strong> আগে ক্যাশ ও ব্যাংক ভাউচার ফর্মে গিয়ে বায়ারের ট্রানজ্যাকশন পোস্ট করতে হবে। রিকনসিলিয়েশন স্ক্রিনে ডাইরেক্ট জার্নাল তৈরি হয় না।</div>
-                        </div>
-                        <hr>
-                        <div class="mb-3">
-                            <div class="font-weight-bold text-danger">৪. সমস্যা: পেরোল পোস্টিং বা সাবমিট করার সময় "Required payroll ledger accounts were not found." লাল নোটিফিকেশন দেখাচ্ছে।</div>
-                            <div class="text-muted small">
-                                <strong>কারণ:</strong> ম্যানুয়াল পেরোল পোস্টিং করার সময় ব্যাকএন্ড ইন্টিগ্রেশন ইঞ্জিন চার্ট অফ অ্যাকাউন্টস (COA)-এ ৪টি নির্দিষ্ট টাইপ ও নামের লেজারকে চেক করে। যদি তাদের কোনো একটি নিষ্ক্রিয় বা অনুপস্থিত থাকে, তাহলে এই ভ্যালিডেশন বাধা দেয়।
-                                <br><strong>সমাধান (কী করলে এই ইরর আসবে না):</strong> <code>Chart of Accounts (COA)</code> এ গিয়ে নিশ্চিত করুন যে নিচের ৪টি লেজার সঠিক <strong>Account Type</strong> এবং নামের কিওয়ার্ড ব্যবহার করে সক্রিয় (Active) করা আছে:
-                                <ul class="pl-3 mt-1 mb-0">
-                                    <li class="mb-1"><strong>১. বেতন খরচ হিসাব (Salary Expense):</strong> এটি <code>Expense</code> টাইপ লেজার হতে হবে এবং নামে <code>salary expense</code>, <code>wages expense</code>, বা <code>payroll expense</code> এর যেকোনো একটি শব্দ থাকতে হবে।</li>
-                                    <li class="mb-1"><strong>২. প্রভিডেন্ট ফান্ড ফান্ড প্রদেয় (PF Liability):</strong> এটি <code>Liability</code> টাইপ লেজার হতে হবে এবং নামে <code>provident fund liability</code>, <code>pf liability</code>, বা <code>provident fund payable</code> থাকতে হবে।</li>
-                                    <li class="mb-1"><strong>৩. অগ্রিম বেতন হিসাব (Advance Salary Asset):</strong> এটি <code>Asset</code> টাইপ লেজার হতে হবে এবং নামে <code>advance salary</code>, <code>salary advance</code>, বা <code>advance salary asset</code> থাকতে হবে।</li>
-                                    <li class="mb-1"><strong>৪. বকেয়া বেতন হিসাব (Salaries Payable):</strong> এটি <code>Liability</code> টাইপ লেজার হতে হবে এবং নামে <code>salary payable</code>, <code>wages payable</code>, বা <code>payable</code> থাকতে হবে।</li>
-                                </ul>
-                            </div>
+                        <div class="seeder-block">
+&lt;?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class ErpAccountMandatoryCOASeeder extends Seeder
+{
+    public function run(): void
+    {
+        $accounts = [
+            // ── PAYROLL ──────────────────────────────────────────────────
+            [
+                'account_name' =&gt; 'Salary Expense - Factory',
+                'account_type' =&gt; 'Expense',
+                'account_code' =&gt; '5001001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "salary expense" (Payroll Dr)',
+            ],
+            [
+                'account_name' =&gt; 'PF Liability - Staff',
+                'account_type' =&gt; 'Liability',
+                'account_code' =&gt; '2003001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "pf liability" (Payroll Cr)',
+            ],
+            [
+                'account_name' =&gt; 'Advance Salary - Workers',
+                'account_type' =&gt; 'Asset',
+                'account_code' =&gt; '1004001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "advance salary" (Payroll Cr)',
+            ],
+            [
+                'account_name' =&gt; 'Salary Payable - Current Month',
+                'account_type' =&gt; 'Liability',
+                'account_code' =&gt; '2001001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "salary payable" (Payroll Cr)',
+            ],
+
+            // ── INVENTORY ────────────────────────────────────────────────
+            [
+                'account_name' =&gt; 'Raw Material Inventory - Fabric',
+                'account_type' =&gt; 'Asset',
+                'account_code' =&gt; '1002001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "raw material" (Inventory Dr/Cr)',
+            ],
+            [
+                'account_name' =&gt; 'Supplier Payable - Local',
+                'account_type' =&gt; 'Liability',
+                'account_code' =&gt; '2002001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "supplier payable" (Purchase Cr)',
+            ],
+            [
+                'account_name' =&gt; 'WIP - Cutting Section',
+                'account_type' =&gt; 'Asset',
+                'account_code' =&gt; '1003001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "wip" (Issue to Production Dr)',
+            ],
+            [
+                'account_name' =&gt; 'Inventory Adjustment Loss',
+                'account_type' =&gt; 'Expense',
+                'account_code' =&gt; '5002001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "inventory adjustment" (Adj Dr)',
+            ],
+
+            // ── BANK / RECONCILIATION ────────────────────────────────────
+            [
+                'account_name' =&gt; 'Dutch Bangla Bank - Current A/C',
+                'account_type' =&gt; 'Asset',
+                'account_code' =&gt; '1001001',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "bank" (Bank Reconciliation)',
+            ],
+            [
+                'account_name' =&gt; 'Cash In Hand',
+                'account_type' =&gt; 'Asset',
+                'account_code' =&gt; '1001002',
+                'is_active'    =&gt; 1,
+                'description'  =&gt; 'Mandatory: keyword "cash" (Petty Cash / Cash Voucher)',
+            ],
+        ];
+
+        foreach ($accounts as $account) {
+            DB::table('chart_of_accounts')-&gt;updateOrInsert(
+                ['account_name' =&gt; $account['account_name']],
+                array_merge($account, [
+                    'created_at' =&gt; now(),
+                    'updated_at' =&gt; now(),
+                ])
+            );
+        }
+
+        $this-&gt;command-&gt;info('ErpAccount mandatory COA records seeded successfully.');
+    }
+}
                         </div>
 
                         <!-- FAQ -->
-                        <h4 class="h6 font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-question-circle text-primary"></i> সচরাচর জিজ্ঞাসিত প্রশ্নাবলী (FAQ):</h4>
+                        <h5 class="font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-question-circle text-primary mr-2"></i>সচরাচর জিজ্ঞাসিত প্রশ্নাবলী (FAQ)</h5>
                         <div class="accordion" id="faqAccordion">
                             <div class="card border-0 mb-2">
                                 <div class="bg-light p-2 font-weight-bold small" style="cursor:pointer;" data-toggle="collapse" data-target="#faq1">
-                                    প্রশ্ন: কোনো ভাউচার ভুল পোস্টিং হলে তা এডিট বা ডিলিট করার কোনো উপায় নেই কেন?
+                                    প্রশ্ন: কোনো ভাউচার ভুল পোস্টিং হলে তা এডিট বা ডিলিট করার কোনো উপায় নেই কেন?
                                 </div>
                                 <div id="faq1" class="collapse show p-2 border-top small text-muted">
-                                    উত্তর: এটি একটি স্ট্রিক্ট ফিনান্সিয়াল স্ট্যান্ডার্ড। হিসাববিজ্ঞান নিয়ম অনুযায়ী একবার অডিট ট্রেইল রেকর্ড হলে তা সরাসরি ডিলিট করা যায় না। ভুল পোস্টিং হলে আপনাকে ভাউচারটি <code>Voucher Register</code> থেকে <code>Void</code> (বাতিল) করতে হবে এবং নতুন ভাউচার রি-পোস্ট করতে হবে।
+                                    উত্তর: এটি একটি স্ট্রিক্ট ফিনান্সিয়াল স্ট্যান্ডার্ড। হিসাববিজ্ঞান নিয়ম অনুযায়ী একবার অডিট ট্রেইল রেকর্ড হলে তা সরাসরি ডিলিট করা যায় না। ভুল পোস্টিং হলে আপনাকে ভাউচারটি <code>Voucher Register</code> থেকে <code>Void</code> (বাতিল) করতে হবে এবং নতুন ভাউচার রি-পোস্ট করতে হবে।
                                 </div>
                             </div>
                             <div class="card border-0 mb-2">
                                 <div class="bg-light p-2 font-weight-bold small" style="cursor:pointer;" data-toggle="collapse" data-target="#faq2">
-                                    প্রশ্ন: কস্ট সেন্টার সিলেক্ট করা কখন বাধ্যতামূলক হয়?
-                                    </div>
+                                    প্রশ্ন: কস্ট সেন্টার সিলেক্ট করা কখন বাধ্যতামূলক হয়?
+                                </div>
                                 <div id="faq2" class="collapse p-2 border-top small text-muted">
-                                    উত্তর: যখনই কোনো লেজারের টাইপ 'Expense' (ব্যয়) বা 'Revenue' (আয়) হবে, তখনই প্রজেক্ট বা ডিপার্টমেন্ট ট্র্যাকিংয়ের স্বার্থে কস্ট সেন্টার কলামটি আনলক হবে এবং ডাটা সিলেক্ট করা বাধ্যতামূলক হবে।
+                                    উত্তর: যখনই কোনো লেজারের টাইপ <code>Expense</code> (ব্যয়) বা <code>Revenue</code> (আয়) হবে, তখনই প্রজেক্ট বা ডিপার্টমেন্ট ট্র্যাকিংয়ের স্বার্থে কস্ট সেন্টার কলামটি আনলক হবে এবং ডাটা সিলেক্ট করা বাধ্যতামূলক হবে।
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+
 
         </div>
     </div>

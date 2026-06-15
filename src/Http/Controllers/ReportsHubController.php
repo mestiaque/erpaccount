@@ -75,6 +75,7 @@ class ReportsHubController extends Controller
             'start_date' => $request->input('start_date', now()->startOfMonth()->toDateString()),
             'end_date' => $request->input('end_date', now()->endOfMonth()->toDateString()),
             'as_on_date' => $request->input('as_on_date', $request->input('end_date', now()->toDateString())),
+            'prev_date' => $request->input('prev_date', now()->subYear()->endOfMonth()->toDateString()),
             'account_id' => $request->input('account_id'),
         ];
     }

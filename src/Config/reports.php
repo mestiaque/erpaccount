@@ -21,6 +21,7 @@ return [
             'icon' => 'fa-solid fa-scale-balanced',
             'reports' => [
                 ['slug' => 'account_balance_statement', 'title' => 'Account Balance Statement'],
+                ['slug' => 'account_balance_comparative', 'title' => 'Account Balance — Comparative (2 Year)'],
                 ['slug' => 'party_ledger_balance', 'title' => 'Party-wise Ledger Balance'],
                 ['slug' => 'monthly_closing_report', 'title' => 'Monthly Closing Report'],
                 ['slug' => 'year_end_closing_report', 'title' => 'Year End Closing Report'],

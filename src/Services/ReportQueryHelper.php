@@ -188,4 +188,45 @@ class ReportQueryHelper
             )
             ->get();
     }
+
+    public function accountBalancesWithGroupAsOn(Carbon $asOn): Collection
+    {
+        return DB::table('acc_chart_of_accounts as coa')
+            ->leftJoin('acc_chart_of_accounts as grp', 'grp.account_id', '=', 'coa.parent_id')
+            ->leftJoin('acc_journal_details as jd', 'jd.account_id', '=', 'coa.account_id')
+            ->leftJoin('acc_journal_masters as jm', function ($join) {
+                JournalQueryScopes::activeMasterOnJoin($join);
+            })
+            ->where('coa.is_active', true)
+            ->where(function ($q) use ($asOn) {
+                $q->whereNull('jm.journal_id')
+                    ->orWhereDate('jm.journal_date', '<=', $asOn->toDateString());
+            })
+            ->groupBy(
+                'coa.account_id', 'coa.account_code', 'coa.account_name', 'coa.account_type',
+                'coa.parent_id', 'grp.account_name', 'grp.account_code'
+            )
+            ->orderBy('coa.account_type')
+            ->orderBy('grp.account_code')
+            ->orderBy('coa.account_code')
+            ->select([
+                'coa.account_id',
+                'coa.account_code',
+                'coa.account_name',
+                'coa.account_type',
+                'coa.parent_id',
+                DB::raw('COALESCE(grp.account_name, coa.account_name) as group_name'),
+                DB::raw('COALESCE(grp.account_code, coa.account_code) as group_code'),
+            ])
+            ->selectRaw('COALESCE(SUM(jd.debit_amount), 0) as total_debit')
+            ->selectRaw('COALESCE(SUM(jd.credit_amount), 0) as total_credit')
+            ->get()
+            ->map(function ($row) {
+                $balance = in_array($row->account_type, ['Asset', 'Expense'], true)
+                    ? (float) $row->total_debit - (float) $row->total_credit
+                    : (float) $row->total_credit - (float) $row->total_debit;
+                $row->balance = round($balance, 2);
+                return $row;
+            });
+    }
 }

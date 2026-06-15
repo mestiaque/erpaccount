@@ -27,13 +27,19 @@
                         <input type="date" name="start_date" class="form-control" value="{{ $filters['start_date'] }}">
                     </div>
                     <div class="form-group col-md-3">
-                        <label>End Date</label>
-                        <input type="date" name="end_date" class="form-control" value="{{ $filters['end_date'] }}">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>As On Date</label>
+                        <label>End Date / As On Date</label>
                         <input type="date" name="as_on_date" class="form-control" value="{{ $filters['as_on_date'] }}">
+                        <input type="hidden" name="end_date" value="{{ $filters['as_on_date'] }}">
                     </div>
+                    @if ($reportSlug === 'account_balance_comparative')
+                    <div class="form-group col-md-3">
+                        <label>Previous Year Date</label>
+                        <input type="date" name="prev_date" class="form-control" value="{{ $filters['prev_date'] }}">
+                        <small class="text-muted">Compare balance as on this date</small>
+                    </div>
+                    @else
+                    <div class="form-group col-md-3"></div>
+                    @endif
                     <div class="form-group col-md-3">
                         <button type="submit" class="btn btn-primary btn-block">Refresh</button>
                     </div>

@@ -109,6 +109,83 @@ trait BuildsBalanceReports
         );
     }
 
+    protected function reportAccountBalanceComparative(array $filters): array
+    {
+        [, , $currDate] = $this->query->parsePeriod($filters);
+        $prevDate = !empty($filters['prev_date'])
+            ? \Carbon\Carbon::parse($filters['prev_date'])->endOfDay()
+            : $currDate->copy()->subYear();
+
+        $curr = $this->query->accountBalancesWithGroupAsOn($currDate)->keyBy('account_id');
+        $prev = $this->query->accountBalancesWithGroupAsOn($prevDate)->keyBy('account_id');
+
+        $allIds = $curr->keys()->merge($prev->keys())->unique();
+
+        $accounts = $allIds->map(function ($id) use ($curr, $prev) {
+            $c = $curr->get($id);
+            $p = $prev->get($id);
+            $base = $c ?? $p;
+            return (object) [
+                'account_id'   => $base->account_id,
+                'account_code' => $base->account_code,
+                'account_name' => $base->account_name,
+                'account_type' => $base->account_type,
+                'group_name'   => $base->group_name,
+                'group_code'   => $base->group_code,
+                'bal_curr'     => round((float) ($c->balance ?? 0), 2),
+                'bal_prev'     => round((float) ($p->balance ?? 0), 2),
+            ];
+        })->filter(fn ($r) => abs($r->bal_curr) > 0.009 || abs($r->bal_prev) > 0.009);
+
+        $typeOrder = ['Current Assets', 'Non Current Assets', 'Asset', 'Current Liabilities', 'Non Current Liabilities', 'Liability', 'Equity', 'Revenue', 'Income', 'Expense'];
+        $grouped = $accounts->groupBy('account_type')
+            ->sortBy(fn ($_, $type) => array_search($type, $typeOrder) !== false ? array_search($type, $typeOrder) : 99);
+
+        $rows = collect();
+        foreach ($grouped as $type => $typeAccounts) {
+            $rows->push((object) ['_row_type' => 'type_header', 'label' => $type, 'bal_curr' => null, 'bal_prev' => null]);
+            $byGroup = $typeAccounts->groupBy('group_name')->sortBy('group_code');
+            $typeSumCurr = 0.0;
+            $typeSumPrev = 0.0;
+
+            foreach ($byGroup as $groupName => $groupAccounts) {
+                $rows->push((object) ['_row_type' => 'group_header', 'label' => $groupName, 'bal_curr' => null, 'bal_prev' => null]);
+                $groupSumCurr = 0.0;
+                $groupSumPrev = 0.0;
+
+                foreach ($groupAccounts->sortBy('account_code') as $acc) {
+                    $rows->push($acc);
+                    $groupSumCurr += $acc->bal_curr;
+                    $groupSumPrev += $acc->bal_prev;
+                }
+
+                $rows->push((object) ['_row_type' => 'group_total', 'label' => 'Total', 'bal_curr' => round($groupSumCurr, 2), 'bal_prev' => round($groupSumPrev, 2)]);
+                $typeSumCurr += $groupSumCurr;
+                $typeSumPrev += $groupSumPrev;
+            }
+
+            $rows->push((object) ['_row_type' => 'type_total', 'label' => 'Account Type Total', 'bal_curr' => round($typeSumCurr, 2), 'bal_prev' => round($typeSumPrev, 2)]);
+        }
+
+        return [
+            'title'       => 'Account Balance — Comparative Statement',
+            'subtitle'    => 'Current: ' . $currDate->toDateString() . '   |   Previous: ' . $prevDate->toDateString(),
+            'render_type' => 'comparative',
+            'curr_label'  => $currDate->format('Y') . ' Balance',
+            'prev_label'  => $prevDate->format('Y') . ' Balance',
+            'columns'     => [
+                ['key' => 'account_type', 'label' => 'Account Type'],
+                ['key' => 'group_name',   'label' => 'Account Group'],
+                ['key' => 'account_name', 'label' => 'Account Title'],
+                ['key' => 'bal_curr',     'label' => $currDate->format('Y') . ' Balance', 'align' => 'right', 'format' => 'money'],
+                ['key' => 'bal_prev',     'label' => $prevDate->format('Y') . ' Balance', 'align' => 'right', 'format' => 'money'],
+            ],
+            'rows'    => $rows->values(),
+            'summary' => [],
+            'notes'   => ['Balances are cumulative as on the selected date. Zero-balance accounts are hidden.'],
+        ];
+    }
+
     protected function reportSuspenseAccountReport(array $filters): array
     {
         [, , $asOn] = $this->query->parsePeriod($filters);
