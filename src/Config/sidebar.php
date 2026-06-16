@@ -48,7 +48,7 @@ return [
                     'icon'       => 'fa-solid fa-book-open-reader',
                     'route'      => '/erpaccount/accounts-tutorial',
                     'icon_color' => 'text-warning',
-                    'permission' => '',
+                    'permission' => 'executive_financial_dashboard',
                 ],
                 [
                     'title'      => 'Configurations',
