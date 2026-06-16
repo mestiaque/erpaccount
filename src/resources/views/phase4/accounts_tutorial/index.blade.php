@@ -921,27 +921,122 @@
             <div id="section-cost-center" class="doc-section">
                 <div class="card card-custom">
                     <div class="card-custom-header d-flex justify-content-between align-items-center">
-                        <h2 class="h4 mb-0 text-primary font-weight-bold">৫. Cost Center Management (ব্যয় কেন্দ্র ব্যবস্থাপনা)</h2>
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">৫. Cost Center Management (ব্যয় কেন্দ্র ব্যবস্থাপনা)</h2>
                         <span class="badge badge-success badge-custom">Config</span>
                     </div>
                     <div class="card-body">
-                        <h4 class="h6 font-weight-bold text-dark">মডিউলের কাজ ও উদ্দেশ্য:</h4>
-                        <p class="text-muted">
-                            Cost Center হলো কোনো ডিপার্টমেন্ট, শাখা বা প্রজেক্ট যেখানে সরাসরি খরচ বা আয় ট্র্যাক করা যায়। সাধারণ কোম্পানি লেজার দিয়ে পুরো অফিসের খরচ দেখে, কিন্তু কস্ট সেন্টার থাকলে কোন ব্রাঞ্চ বা প্রজেক্টে কত খরচ হয়েছে তা আলাদা করে দেখা যায়।
-                        </p>
-                        <div class="alert alert-info-light my-3">
-                            <strong>কখন ব্যবহার করবেন:</strong> খরচের ভাউচার পোস্টিংয়ের সময় নির্দিষ্ট খরচটি কোন প্রজেক্ট বা ডিপার্টমেন্টের অধীনে তা চিহ্নিত করতে।
+
+                        <div class="alert-callout alert-callout-note mb-4">
+                            <strong>Cost Center কী?</strong> Cost Center হলো একটি ট্যাগ বা লেবেল — যেটি দিয়ে কোনো খরচ বা আয় কোন বিভাগ/প্রজেক্ট/স্টাইলের জন্য হয়েছে তা চিহ্নিত করা হয়।
+                            COA-তে শুধু লেজার থাকে (যেমন: Electricity Bill), কিন্তু কস্ট সেন্টার দিয়ে বলা যায় এই বিলটি কোন ফ্লোরের বা কোন অর্ডারের।
                         </div>
 
-                        <h4 class="h6 font-weight-bold text-dark mt-4">Field Details (ক্ষেত্রসমূহ):</h4>
+                        <h5 class="font-weight-bold text-success mt-3 mb-3"><i class="fa fa-th-large mr-2"></i>Cost Center Type — কত ধরনের?</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>বাংলা নাম</th>
+                                        <th>কখন ব্যবহার করবেন</th>
+                                        <th>উদাহরণ</th>
+                                        <th>রিপোর্টে প্রভাব</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Department</strong></td>
+                                        <td>বিভাগ</td>
+                                        <td>অফিসের স্থায়ী বিভাগের খরচ ট্র্যাক করতে</td>
+                                        <td><code>Cutting Dept</code>, <code>Admin Office</code></td>
+                                        <td>Department-wise P&amp;L রিপোর্টে আলাদা লাইন</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Branch</strong></td>
+                                        <td>শাখা</td>
+                                        <td>একাধিক শাখা/কারখানা আলাদাভাবে ম্যানেজ করতে</td>
+                                        <td><code>Factory – Hatiabo</code>, <code>Factory – Mirpur</code></td>
+                                        <td>Branch-wise খরচ তুলনামূলক রিপোর্ট</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Project</strong></td>
+                                        <td>প্রকল্প</td>
+                                        <td>নির্দিষ্ট মেয়াদি কাজের খরচ ট্র্যাক করতে</td>
+                                        <td><code>New Building Construction</code>, <code>ERP Implementation</code></td>
+                                        <td>Project-wise খরচ বনাম বাজেট তুলনা</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Style / Order</strong></td>
+                                        <td>স্টাইল / অর্ডার</td>
+                                        <td>RMG: প্রতিটি Buyer Order-এর কস্টিং করতে</td>
+                                        <td><code>Style-H&amp;M-2024-001</code>, <code>PO-ZARA-456</code></td>
+                                        <td>Order-wise CM Cost ও Profitability রিপোর্ট</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-success mt-4 mb-3"><i class="fa fa-lock-open mr-2"></i>Cost Center কখন Unlock হয়? (ভাউচারে)</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="border-left border-success pl-3 py-2 mb-3">
+                                    <strong class="text-success d-block mb-1"><i class="fa fa-check-circle mr-1"></i>Unlock হবে (সিলেক্ট করা বাধ্যতামূলক)</strong>
+                                    <p class="small text-muted mb-0">COA-তে সিলেক্ট করা লেজারের <strong>Account Type = Expense</strong> অথবা <strong>Account Type = Revenue</strong> হলে।</p>
+                                    <p class="small text-muted mt-1 mb-0">উদাহরণ: Electricity Bill (Expense), Sales Revenue (Revenue)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border-left border-danger pl-3 py-2 mb-3">
+                                    <strong class="text-danger d-block mb-1"><i class="fa fa-times-circle mr-1"></i>Locked থাকবে (নিষ্ক্রিয়)</strong>
+                                    <p class="small text-muted mb-0">সিলেক্ট করা লেজারের Account Type = <strong>Asset</strong>, <strong>Liability</strong>, বা <strong>Equity</strong> হলে।</p>
+                                    <p class="small text-muted mt-1 mb-0">উদাহরণ: Cash in Hand (Asset), Salary Payable (Liability)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-success mt-4 mb-3"><i class="fa fa-chart-bar mr-2"></i>রিপোর্টে Cost Center-এর প্রভাব</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead style="background:#1e3a5f; color:#fff;">
+                                    <tr>
+                                        <th>রিপোর্ট নাম</th>
+                                        <th>Cost Center ছাড়া</th>
+                                        <th>Cost Center সহ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Profit &amp; Loss Statement</td>
+                                        <td>শুধু পুরো কোম্পানির মোট লাভ/ক্ষতি</td>
+                                        <td>প্রতিটি Department / Branch-এর আলাদা P&amp;L দেখা যাবে</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Expense Analysis Report</td>
+                                        <td>শুধু লেজার অনুযায়ী খরচের তালিকা</td>
+                                        <td>কোন বিভাগ সবচেয়ে বেশি বিদ্যুৎ/ভাড়া খরচ করেছে</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Order / Style Costing</td>
+                                        <td>মোট উৎপাদন খরচ</td>
+                                        <td>প্রতিটি Buyer Order-এর আলাদা CM Cost দেখা যাবে</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Trial Balance</td>
+                                        <td>সকল লেজারের ব্যালেন্স একসাথে</td>
+                                        <td>নির্দিষ্ট Cost Center Filter করে দেখা যাবে</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-success mt-4 mb-3"><i class="fa fa-keyboard mr-2"></i>Field Details (ক্ষেত্রসমূহ)</h5>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-custom">
-                                <thead>
+                            <table class="table table-bordered table-sm">
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>Field Name</th>
                                         <th>উদ্দেশ্য</th>
-                                        <th>প্রয়োজনীয়তা</th>
-                                        <th>ডাটার উৎস</th>
+                                        <th>Required</th>
                                         <th>উদাহরণ</th>
                                         <th>ভুল দিলে সমস্যা</th>
                                     </tr>
@@ -949,31 +1044,29 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>Cost Center Code</strong></td>
-                                        <td>অনন্য কোড নাম্বার।</td>
-                                        <td>Required</td>
-                                        <td>ইউজার টাইপ করবেন।</td>
+                                        <td>অনন্য কোড নম্বর</td>
+                                        <td><span class="badge badge-danger">Required</span></td>
                                         <td><code>CC-DHAKA-01</code></td>
-                                        <td>ডুপ্লিকেট কোড সাবমিট হবে না।</td>
+                                        <td>ডুপ্লিকেট কোড সাবমিট হবে না</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Cost Center Name</strong></td>
-                                        <td>ব্যয় কেন্দ্রের নাম।</td>
-                                        <td>Required</td>
-                                        <td>ইউজার টাইপ করবেন।</td>
-                                        <td><code>Dhaka Branch</code>, <code>Cutting Dept</code></td>
-                                        <td>রিপোর্ট এনালাইসিসের সময় ভুল ব্রাঞ্চ বা ডিপার্টমেন্টের নাম দেখাবে।</td>
+                                        <td>ব্যয় কেন্দ্রের নাম</td>
+                                        <td><span class="badge badge-danger">Required</span></td>
+                                        <td><code>Cutting Dept</code>, <code>Factory – Hatiabo</code></td>
+                                        <td>রিপোর্টে ভুল নাম দেখাবে</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Cost Center Type</strong></td>
-                                        <td>এটি কোন ক্যাটাগরি (প্রজেক্ট, শাখা না ডিপার্টমেন্ট)।</td>
-                                        <td>Required</td>
-                                        <td>ড্রপডাউন/টাইপ সিলেক্টর</td>
-                                        <td><code>Branch</code>, <code>Department</code></td>
-                                        <td>ডিপার্টমেন্টের খরচ শাখার সাথে গুলিয়ে যাবে।</td>
+                                        <td>ক্যাটাগরি (Department / Branch / Project / Style)</td>
+                                        <td><span class="badge badge-danger">Required</span></td>
+                                        <td><code>Department</code></td>
+                                        <td>ফিল্টার ও গ্রুপিং ভুল হবে</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -1344,88 +1437,102 @@
             <div id="section-payroll" class="doc-section">
                 <div class="card card-custom">
                     <div class="card-custom-header d-flex justify-content-between align-items-center">
-                        <h2 class="h4 mb-0 text-primary font-weight-bold">১১. Payroll Management (পেরোল ম্যানেজমেন্ট)</h2>
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">১১. Payroll Management — Manual Integration (পেরোল ম্যানুয়াল পোস্টিং)</h2>
                         <span class="badge badge-warning badge-custom">Payroll Module</span>
                     </div>
                     <div class="card-body">
 
                         <div class="alert-callout alert-callout-important mb-4">
-                            <strong>গুরুত্বপূর্ণ:</strong> মাসের শেষ দিনে (Last Day of Month) পেরোল পোস্টিং করতে হবে।
-                            পোস্টিং ডেটা <strong>Payroll → Monthly Salary Sheet</strong> থেকে স্বয়ংক্রিয়ভাবে লোড হয়।
-                            ম্যানুয়াল জার্নাল এন্ট্রির আগে সেলারি শিট <em>Approved</em> অবস্থায় থাকা বাধ্যতামূলক।
+                            <strong>গুরুত্বপূর্ণ:</strong> পেরোল মডিউল থেকে Accounts-এ পোস্টিং <strong>ম্যানুয়ালি</strong> করতে হয়।
+                            সিস্টেম স্বয়ংক্রিয়ভাবে পোস্ট করে না — প্রতি মাসে Accounts টিমকে নিজে থেকে পোস্টিং দিতে হবে।
                         </div>
 
-                        <h5 class="font-weight-bold text-warning mt-4 mb-3"><i class="fa fa-keyboard mr-2"></i>ধাপে ধাপে ডেটা এন্ট্রি (Data Entry Steps)</h5>
+                        <h5 class="font-weight-bold text-warning mt-3 mb-3"><i class="fa fa-clipboard-check mr-2"></i>Pre-Conditions — পোস্টিং দেওয়ার আগে যা নিশ্চিত করতে হবে</h5>
                         <div class="table-responsive mb-4">
                             <table class="table table-sm table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Field Name</th>
-                                        <th>বাংলা নাম</th>
-                                        <th>Required</th>
-                                        <th>নির্দেশনা</th>
-                                    </tr>
-                                </thead>
+                                <thead class="thead-dark"><tr><th>#</th><th>শর্ত</th><th>কোথায় চেক করবেন</th><th>না হলে কী হবে</th></tr></thead>
                                 <tbody>
-                                    <tr><td>1</td><td>Voucher Date</td><td>ভাউচার তারিখ</td><td><span class="badge badge-danger">Required</span></td><td>মাসের শেষ তারিখ দিতে হবে, যেমন: <code>2024-06-30</code></td></tr>
-                                    <tr><td>2</td><td>Salary Month</td><td>বেতন মাস</td><td><span class="badge badge-danger">Required</span></td><td>Dropdown থেকে সঠিক মাস সিলেক্ট করুন</td></tr>
-                                    <tr><td>3</td><td>Department / Cost Centre</td><td>বিভাগ</td><td><span class="badge badge-danger">Required</span></td><td>Factory / Admin / Commercial বিভাগ আলাদাভাবে পোস্ট করুন</td></tr>
-                                    <tr><td>4</td><td>Salary Expense Account</td><td>বেতন ব্যয় লেজার</td><td><span class="badge badge-danger">Required</span></td><td>COA থেকে <em>salary expense</em> কীওয়ার্ড যুক্ত Expense অ্যাকাউন্ট বেছে নিন</td></tr>
-                                    <tr><td>5</td><td>PF Liability Account</td><td>প্রভিডেন্ট ফান্ড দায়</td><td><span class="badge badge-warning">Conditional</span></td><td>PF প্রযোজ্য হলে <em>provident fund</em> / <em>pf liability</em> কীওয়ার্ড যুক্ত Liability অ্যাকাউন্ট</td></tr>
-                                    <tr><td>6</td><td>Advance Deduction Account</td><td>অগ্রিম কর্তন</td><td><span class="badge badge-warning">Conditional</span></td><td>অগ্রিম থাকলে <em>advance salary</em> কীওয়ার্ড যুক্ত Asset অ্যাকাউন্ট বেছে নিন</td></tr>
-                                    <tr><td>7</td><td>Salary Payable Account</td><td>প্রদেয় বেতন</td><td><span class="badge badge-danger">Required</span></td><td>নেট প্রদেয় টাকার জন্য <em>salary payable</em> কীওয়ার্ড যুক্ত Liability অ্যাকাউন্ট</td></tr>
+                                    <tr><td>1</td><td>Salary Sheet <strong>Approved</strong> অবস্থায় আছে</td><td>Payroll → Monthly Salary Sheet → Status</td><td>পোস্টিং ফর্মে ডেটা লোড হবে না</td></tr>
+                                    <tr><td>2</td><td>COA-তে ৪টি mandatory লেজার Active আছে</td><td>Accounts → Chart of Accounts</td><td><code>Required payroll ledger accounts were not found</code> error</td></tr>
+                                    <tr><td>3</td><td>Financial Period সেই মাসের জন্য Open আছে</td><td>Accounts → Tax Rates &amp; Financial Periods</td><td><code>Voucher submission blocked (period closed)</code> error</td></tr>
+                                    <tr><td>4</td><td>Cost Center (Department) তৈরি আছে</td><td>Accounts → Cost Centers</td><td>Department সিলেক্ট করা যাবে না</td></tr>
                                 </tbody>
                             </table>
                         </div>
 
-                        <h5 class="font-weight-bold text-warning mt-4 mb-3"><i class="fa fa-book-open mr-2"></i>জার্নাল এন্ট্রি প্রিভিউ (Journal Preview)</h5>
+                        <h5 class="font-weight-bold text-warning mt-4 mb-3"><i class="fa fa-list-ol mr-2"></i>ধাপে ধাপে পোস্টিং প্রক্রিয়া (Full SOP)</h5>
+                        <div class="flow-container py-3 mb-4">
+                            <div class="flow-node"><strong>ধাপ ১:</strong> Payroll → Payroll Posting ফর্মে যান</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ২:</strong> Voucher Date = মাসের শেষ তারিখ দিন (যেমন: <code>2024-06-30</code>)</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৩:</strong> Salary Month সিলেক্ট করুন → সিস্টেম Salary Sheet থেকে ডেটা লোড করবে</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৪:</strong> Department / Cost Center সিলেক্ট করুন (Factory / Admin / Commercial আলাদাভাবে)</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৫:</strong> COA থেকে ৪টি লেজার ম্যাপ করুন (Salary Expense, PF Liability, Advance, Salary Payable)</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৬:</strong> System-generated Journal Preview চেক করুন — Dr = Cr হওয়া বাধ্যতামূলক</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node text-white" style="background:linear-gradient(135deg,#0d9488,#0f766e)"><strong>ধাপ ৭:</strong> Submit করুন → Voucher Register-এ Entry দেখা যাবে</div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-warning mt-4 mb-3"><i class="fa fa-book-open mr-2"></i>জার্নাল এন্ট্রি প্রিভিউ</h5>
                         <div class="journal-preview mb-4">
-                            <span class="arr">★ Payroll Journal — June 2024 (Factory Dept)</span><br>
-                            <span class="dr">  Dr.  Salary Expense – Factory          120,000.00</span><br>
+                            <span class="arr">★ Payroll Journal — June 2024 (Factory Dept)  [Journal Voucher]</span><br>
+                            <span class="dr">  Dr.  Salary Expense – Factory          120,000.00  [Cost Center: Factory Dept]</span><br>
                             <span class="cr">    Cr.  PF Liability – Staff                 4,800.00</span><br>
                             <span class="cr">    Cr.  Advance Salary – Workers             8,500.00</span><br>
                             <span class="cr">    Cr.  Salary Payable – Current Month     106,700.00</span><br>
-                            <span class="arr">  ─────────────────────────────────────────────────</span><br>
+                            <span class="arr">  ─────────────────────────────────────────────────────</span><br>
                             <span class="arr">  Total Dr = Total Cr = 120,000.00  ✔ Balanced</span>
                         </div>
 
-                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>বাধ্যতামূলক COA রেকর্ড (Mandatory COA Validation)</h5>
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-tags mr-2"></i>Cost Center ও Party — পেরোলে কোথায় লাগে?</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="border-left border-warning pl-3 py-2">
+                                    <strong class="text-warning d-block mb-1"><i class="fa fa-tags mr-1"></i>Cost Center</strong>
+                                    <p class="small text-muted mb-0"><strong>লাগবে:</strong> Salary Expense লেজারের বিপরীতে (Account Type = Expense)।<br>
+                                    Factory, Admin, Commercial — প্রতিটি ডিপার্টমেন্টের জন্য আলাদা পোস্টিং দিলে আলাদা Cost Center সিলেক্ট করুন।<br>
+                                    <strong>রিপোর্ট প্রভাব:</strong> Department-wise Salary Report এ প্রতিটি বিভাগের বেতন আলাদাভাবে দেখা যাবে।</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border-left border-secondary pl-3 py-2">
+                                    <strong class="text-secondary d-block mb-1"><i class="fa fa-users mr-1"></i>Party</strong>
+                                    <p class="small text-muted mb-0"><strong>লাগবে না:</strong> পেরোল পোস্টিংয়ে Party (Buyer/Supplier) সিলেক্টের প্রয়োজন নেই।<br>
+                                    Salary Payable একটি সাধারণ Liability লেজার — এখানে individual employee tracking হয় না।<br>
+                                    <strong>ব্যক্তিগত বকেয়া ট্র্যাক করতে হলে:</strong> Employee-wise Advance অ্যাকাউন্ট তৈরি করুন।</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>সম্ভাব্য Errors ও সমাধান</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead style="background:#7f1d1d; color:#fff;"><tr><th>Error Message</th><th>কারণ</th><th>সমাধান</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>Required payroll ledger accounts were not found</code></td><td>COA-তে keyword-matched লেজার নেই বা inactive</td><td>COA-তে নিচের ৪টি লেজার তৈরি/active করুন</td></tr>
+                                    <tr><td><code>Salary sheet not approved</code></td><td>Payroll মডিউলে শিট Approved করা হয়নি</td><td>Payroll → Monthly Salary Sheet → Approve করুন</td></tr>
+                                    <tr><td><code>Period is closed</code></td><td>পোস্টিং তারিখের মাস Closed</td><td>Tax Rates &amp; Financial Periods → মাসটি Open করুন</td></tr>
+                                    <tr><td>Dr ≠ Cr (Imbalanced)</td><td>PF বা Advance লেজার ভুল ধরনের (Asset/Liability মিশ্রণ)</td><td>COA-তে লেজার টাইপ পুনরায় চেক করুন</td></tr>
+                                    <tr><td>Cost Center dropdown নিষ্ক্রিয়</td><td>Salary Expense-এর Account Type Expense নয়</td><td>COA-তে ঐ লেজারের type = Expense নিশ্চিত করুন</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>বাধ্যতামূলক COA রেকর্ড (৪টি লেজার অবশ্যই থাকতে হবে)</h5>
                         <div class="table-responsive">
                             <table class="coa-mandatory-table">
                                 <thead>
-                                    <tr>
-                                        <th>Account Purpose</th>
-                                        <th>Mandatory Keyword / Pattern</th>
-                                        <th>System Account Type</th>
-                                        <th>Production Example Name</th>
-                                    </tr>
+                                    <tr><th>Account Purpose</th><th>Mandatory Keyword</th><th>Account Type</th><th>Example Name</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>বেতন ব্যয় (Salary Expense)</td>
-                                        <td><span class="keyword-cell">salary expense</span></td>
-                                        <td>Expense</td>
-                                        <td>Salary Expense – Factory</td>
-                                    </tr>
-                                    <tr>
-                                        <td>প্রভিডেন্ট ফান্ড দায় (PF Liability)</td>
-                                        <td><span class="keyword-cell">provident fund</span> বা <span class="keyword-cell">pf liability</span></td>
-                                        <td>Liability</td>
-                                        <td>PF Liability – Staff</td>
-                                    </tr>
-                                    <tr>
-                                        <td>অগ্রিম বেতন (Advance Salary)</td>
-                                        <td><span class="keyword-cell">advance salary</span></td>
-                                        <td>Asset</td>
-                                        <td>Advance Salary – Workers</td>
-                                    </tr>
-                                    <tr>
-                                        <td>প্রদেয় বেতন (Salary Payable)</td>
-                                        <td><span class="keyword-cell">salary payable</span></td>
-                                        <td>Liability</td>
-                                        <td>Salary Payable – Current Month</td>
-                                    </tr>
+                                    <tr><td>বেতন ব্যয়</td><td><span class="keyword-cell">salary expense</span></td><td>Expense</td><td>Salary Expense – Factory</td></tr>
+                                    <tr><td>প্রভিডেন্ট ফান্ড দায়</td><td><span class="keyword-cell">provident fund</span> বা <span class="keyword-cell">pf liability</span></td><td>Liability</td><td>PF Liability – Staff</td></tr>
+                                    <tr><td>অগ্রিম বেতন</td><td><span class="keyword-cell">advance salary</span></td><td>Asset</td><td>Advance Salary – Workers</td></tr>
+                                    <tr><td>প্রদেয় বেতন</td><td><span class="keyword-cell">salary payable</span></td><td>Liability</td><td>Salary Payable – Current Month</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1438,126 +1545,142 @@
             <div id="section-inventory" class="doc-section">
                 <div class="card card-custom">
                     <div class="card-custom-header d-flex justify-content-between align-items-center">
-                        <h2 class="h4 mb-0 text-primary font-weight-bold">১২. Inventory Financial Journal (ইনভেন্টরি আর্থিক জার্নাল)</h2>
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">১২. Inventory Financial Journal — Manual Integration (ইনভেন্টরি আর্থিক জার্নাল)</h2>
                         <span class="badge badge-info badge-custom">Inventory Module</span>
                     </div>
                     <div class="card-body">
 
                         <div class="alert-callout alert-callout-note mb-4">
-                            <strong>নোট:</strong> ইনভেন্টরি জার্নাল পোস্টিং ৩টি ট্রান্জ্যাকশন টাইপে বিভক্ত।
-                            প্রতিটি টাইপের জন্য ভিন্ন অ্যাকাউন্ট সেটআপ প্রয়োজন।
-                            <strong>Transaction Type</strong> সিলেক্ট করলে ফর্মের ফিল্ড স্বয়ংক্রিয়ভাবে পরিবর্তন হবে।
+                            <strong>নোট:</strong> ইনভেন্টরি জার্নাল পোস্টিং <strong>৩টি Transaction Type</strong>-এ বিভক্ত — প্রতিটির জন্য আলাদা COA লেজার ও আলাদা SOP।
+                            Transaction Type সিলেক্ট করলে ফর্মের ফিল্ড স্বয়ংক্রিয়ভাবে পরিবর্তন হয়।
                         </div>
 
-                        <h5 class="font-weight-bold text-info mt-3 mb-3"><i class="fa fa-th-large mr-2"></i>Transaction Type নির্বাচন করুন</h5>
+                        <h5 class="font-weight-bold text-info mt-3 mb-3"><i class="fa fa-clipboard-check mr-2"></i>Pre-Conditions — পোস্টিং দেওয়ার আগে</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead class="thead-dark"><tr><th>#</th><th>শর্ত</th><th>কোথায় চেক করবেন</th><th>না হলে কী হবে</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>Inventory Item তৈরি আছে</td><td>Inventory → Item List</td><td>Item dropdown-এ দেখা যাবে না</td></tr>
+                                    <tr><td>2</td><td>COA-তে mandatory লেজার Active</td><td>Accounts → Chart of Accounts</td><td><code>Required inventory ledger accounts were not found</code></td></tr>
+                                    <tr><td>3</td><td>Supplier Master তৈরি আছে (Purchase এর জন্য)</td><td>Suppliers → Supplier List</td><td>Party সিলেক্ট করা যাবে না</td></tr>
+                                    <tr><td>4</td><td>Financial Period Open আছে</td><td>Accounts → Tax Rates &amp; Financial Periods</td><td>Period closed error</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-th-large mr-2"></i>Transaction Type — ৩টি ভিন্ন প্রক্রিয়া</h5>
                         <div class="row mb-4">
                             <div class="col-md-4 mb-3">
                                 <div class="trans-type-card">
                                     <h6 class="font-weight-bold text-success mb-1"><i class="fa fa-shopping-cart mr-1"></i> Material Purchase</h6>
-                                    <p class="small text-muted mb-0">কাঁচামাল ক্রয় — ইনভেন্টরি ডেবিট, সাপ্লায়ার ক্রেডিট</p>
+                                    <p class="small text-muted mb-1">কাঁচামাল ক্রয় — ইনভেন্টরি ডেবিট, সাপ্লায়ার ক্রেডিট</p>
+                                    <p class="small mb-0"><strong>Party:</strong> <span class="badge badge-danger">Required</span> (Supplier)</p>
+                                    <p class="small mb-0"><strong>Cost Center:</strong> Optional</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="trans-type-card">
                                     <h6 class="font-weight-bold text-warning mb-1"><i class="fa fa-industry mr-1"></i> Issue to Production</h6>
-                                    <p class="small text-muted mb-0">উৎপাদনে পাঠানো — WIP ডেবিট, ইনভেন্টরি ক্রেডিট</p>
+                                    <p class="small text-muted mb-1">উৎপাদনে পাঠানো — WIP ডেবিট, ইনভেন্টরি ক্রেডিট</p>
+                                    <p class="small mb-0"><strong>Party:</strong> Not Required</p>
+                                    <p class="small mb-0"><strong>Cost Center:</strong> <span class="badge badge-danger">Required</span> (Style/Order)</p>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="trans-type-card">
                                     <h6 class="font-weight-bold text-danger mb-1"><i class="fa fa-balance-scale mr-1"></i> Inventory Adjustment</h6>
-                                    <p class="small text-muted mb-0">স্টক এডজাস্টমেন্ট — লস/গেইন রেকর্ড করা হয়</p>
+                                    <p class="small text-muted mb-1">স্টক এডজাস্টমেন্ট — Loss/Gain রেকর্ড</p>
+                                    <p class="small mb-0"><strong>Party:</strong> Not Required</p>
+                                    <p class="small mb-0"><strong>Cost Center:</strong> Optional</p>
                                 </div>
                             </div>
                         </div>
 
-                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-keyboard mr-2"></i>ডেটা এন্ট্রি ফিল্ড (Data Entry Fields)</h5>
-                        <div class="table-responsive mb-4">
-                            <table class="table table-sm table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Field Name</th>
-                                        <th>বাংলা নাম</th>
-                                        <th>Trans Type</th>
-                                        <th>নির্দেশনা</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>1</td><td>Voucher Date</td><td>ভাউচার তারিখ</td><td>All</td><td>ক্রয়/ইস্যু/এডজাস্টমেন্টের প্রকৃত তারিখ</td></tr>
-                                    <tr><td>2</td><td>Transaction Type</td><td>লেনদেনের ধরন</td><td>All</td><td>Material Purchase / Issue to Production / Inventory Adjustment</td></tr>
-                                    <tr><td>3</td><td>Item / Product</td><td>পণ্য</td><td>All</td><td>Inventory Item List থেকে সিলেক্ট করুন</td></tr>
-                                    <tr><td>4</td><td>Quantity</td><td>পরিমাণ</td><td>All</td><td>ইউনিট অনুযায়ী পরিমাণ লিখুন</td></tr>
-                                    <tr><td>5</td><td>Unit Cost</td><td>একক মূল্য</td><td>Purchase, Adj.</td><td>প্রতি ইউনিটের ক্রয় মূল্য</td></tr>
-                                    <tr><td>6</td><td>Inventory Account (Dr/Cr)</td><td>ইনভেন্টরি লেজার</td><td>All</td><td><em>inventory</em> বা <em>raw material</em> কীওয়ার্ড যুক্ত Asset অ্যাকাউন্ট</td></tr>
-                                    <tr><td>7</td><td>Supplier Payable Account</td><td>সাপ্লায়ার দায়</td><td>Purchase</td><td><em>supplier payable</em> কীওয়ার্ড যুক্ত Liability অ্যাকাউন্ট</td></tr>
-                                    <tr><td>8</td><td>WIP Account</td><td>প্রক্রিয়াধীন উৎপাদন</td><td>Issue to Production</td><td><em>work in progress</em> বা <em>wip</em> কীওয়ার্ড যুক্ত Asset অ্যাকাউন্ট</td></tr>
-                                    <tr><td>9</td><td>Adjustment Account</td><td>এডজাস্টমেন্ট লেজার</td><td>Adjustment</td><td><em>inventory adjustment</em> কীওয়ার্ড যুক্ত Expense অ্যাকাউন্ট</td></tr>
-                                </tbody>
-                            </table>
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-list-ol mr-2"></i>SOP — Material Purchase (কাঁচামাল ক্রয়)</h5>
+                        <div class="flow-container py-2 mb-3">
+                            <div class="flow-node"><strong>ধাপ ১:</strong> Inventory → Financial Journal → Transaction Type = <strong>Material Purchase</strong> সিলেক্ট</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ২:</strong> Voucher Date = ক্রয়ের প্রকৃত তারিখ দিন</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৩:</strong> Item সিলেক্ট → Quantity ও Unit Cost দিন</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৪:</strong> Party Type = Supplier → Supplier সিলেক্ট করুন (বাধ্যতামূলক)</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৫:</strong> Inventory Account (Dr) ও Supplier Payable Account (Cr) COA থেকে সিলেক্ট</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node text-white" style="background:linear-gradient(135deg,#0d9488,#0f766e)"><strong>ধাপ ৬:</strong> Submit → Voucher Register + Supplier Outstanding-এ এন্ট্রি দেখা যাবে</div>
                         </div>
 
-                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-book-open mr-2"></i>জার্নাল প্রিভিউ — তিনটি ট্রান্জ্যাকশন টাইপ</h5>
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-book-open mr-2"></i>জার্নাল প্রিভিউ — ৩টি ট্রান্জ্যাকশন টাইপ</h5>
                         <div class="row mb-4">
                             <div class="col-md-4 mb-3">
                                 <div class="journal-preview" style="font-size:0.75rem;">
                                     <span class="arr">★ Material Purchase</span><br>
                                     <span class="dr">  Dr.  Raw Material Inventory   50,000</span><br>
-                                    <span class="cr">    Cr.  Supplier Payable – Local 50,000</span>
+                                    <span class="cr">    Cr.  Supplier Payable – Local 50,000</span><br>
+                                    <span class="arr">  Party: Supplier ABC  ✔</span>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="journal-preview" style="font-size:0.75rem;">
                                     <span class="arr">★ Issue to Production</span><br>
                                     <span class="dr">  Dr.  WIP – Cutting Section     30,000</span><br>
-                                    <span class="cr">    Cr.  Raw Material Inventory   30,000</span>
+                                    <span class="cr">    Cr.  Raw Material Inventory   30,000</span><br>
+                                    <span class="arr">  Cost Center: Style H&amp;M-001  ✔</span>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <div class="journal-preview" style="font-size:0.75rem;">
                                     <span class="arr">★ Inventory Adjustment (Loss)</span><br>
                                     <span class="dr">  Dr.  Inventory Adjustment Loss  2,000</span><br>
-                                    <span class="cr">    Cr.  Raw Material Inventory    2,000</span>
+                                    <span class="cr">    Cr.  Raw Material Inventory    2,000</span><br>
+                                    <span class="arr">  No Party required  ✔</span>
                                 </div>
                             </div>
                         </div>
 
-                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>বাধ্যতামূলক COA রেকর্ড (Mandatory COA Validation)</h5>
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-users mr-2"></i>Party কোথা থেকে আসে ও কেন লাগে?</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="border-left border-info pl-3 py-2">
+                                    <strong class="d-block mb-1 text-dark">Party-র উৎস:</strong>
+                                    <p class="small text-muted mb-0">Party (Supplier) ডেটা আসে <strong>Supplier Master</strong> থেকে।
+                                    Inventory Purchase-এ যে Supplier-এর কাছ থেকে কাঁচামাল কেনা হয়েছে তাকে সিলেক্ট করতে হয়।<br>
+                                    <strong>পথ:</strong> Suppliers → Supplier List → Supplier তৈরি করুন, তারপর Inventory Journal-এ সেই Supplier দেখা যাবে।</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border-left border-success pl-3 py-2">
+                                    <strong class="d-block mb-1 text-dark">Party কেন ব্যবহার হচ্ছে?</strong>
+                                    <p class="small text-muted mb-0">Party সিলেক্ট করলে সিস্টেম ঐ Supplier-এর <strong>Supplier Outstanding / Aging Report</strong> তৈরি করতে পারে।
+                                    অর্থাৎ ঐ Supplier-এর কাছে কত টাকা বাকি আছে, কত দিন ধরে বাকি — এই তথ্য Party-র মাধ্যমে রিপোর্টে আসে।</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>সম্ভাব্য Errors ও সমাধান</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead style="background:#7f1d1d; color:#fff;"><tr><th>Error</th><th>কারণ</th><th>সমাধান</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>Required inventory ledger accounts were not found</code></td><td>COA-তে keyword-matched লেজার নেই</td><td>COA-তে নিচের ৪টি লেজার তৈরি করুন</td></tr>
+                                    <tr><td>Supplier Payable লেজার সিলেক্ট করা যাচ্ছে না</td><td>COA-তে account_name-এ <code>supplier payable</code> নেই</td><td>COA-তে লেজার নামে <code>supplier payable</code> keyword রাখুন</td></tr>
+                                    <tr><td>WIP লেজার দেখা যাচ্ছে না</td><td>COA-তে <code>wip</code> বা <code>work in progress</code> keyword নেই</td><td>COA-তে WIP লেজার তৈরি করুন</td></tr>
+                                    <tr><td>Cost Center dropdown নিষ্ক্রিয় (Issue to Production)</td><td>WIP Account-এর type Asset — Cost Center Asset-এ unlock হয় না</td><td>WIP Cost Center input এ ইউজার-সাইডে manually enter করুন</td></tr>
+                                    <tr><td>Dr ≠ Cr</td><td>Quantity × Unit Cost হিসাব ভুল</td><td>পরিমাণ ও একক মূল্য পুনরায় চেক করুন</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>বাধ্যতামূলক COA রেকর্ড</h5>
                         <div class="table-responsive">
                             <table class="coa-mandatory-table">
-                                <thead>
-                                    <tr>
-                                        <th>Account Purpose</th>
-                                        <th>Mandatory Keyword / Pattern</th>
-                                        <th>System Account Type</th>
-                                        <th>Production Example Name</th>
-                                    </tr>
-                                </thead>
+                                <thead><tr><th>Account Purpose</th><th>Mandatory Keyword</th><th>Account Type</th><th>Example Name</th></tr></thead>
                                 <tbody>
-                                    <tr>
-                                        <td>কাঁচামাল ইনভেন্টরি</td>
-                                        <td><span class="keyword-cell">raw material</span> বা <span class="keyword-cell">inventory</span></td>
-                                        <td>Asset</td>
-                                        <td>Raw Material Inventory – Fabric</td>
-                                    </tr>
-                                    <tr>
-                                        <td>সাপ্লায়ার দায় (Supplier Payable)</td>
-                                        <td><span class="keyword-cell">supplier payable</span></td>
-                                        <td>Liability</td>
-                                        <td>Supplier Payable – Local</td>
-                                    </tr>
-                                    <tr>
-                                        <td>প্রক্রিয়াধীন উৎপাদন (WIP)</td>
-                                        <td><span class="keyword-cell">work in progress</span> বা <span class="keyword-cell">wip</span></td>
-                                        <td>Asset</td>
-                                        <td>WIP – Cutting Section</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ইনভেন্টরি এডজাস্টমেন্ট লস</td>
-                                        <td><span class="keyword-cell">inventory adjustment</span></td>
-                                        <td>Expense</td>
-                                        <td>Inventory Adjustment Loss</td>
-                                    </tr>
+                                    <tr><td>কাঁচামাল ইনভেন্টরি</td><td><span class="keyword-cell">raw material</span> বা <span class="keyword-cell">inventory</span></td><td>Asset</td><td>Raw Material Inventory – Fabric</td></tr>
+                                    <tr><td>সাপ্লায়ার দায়</td><td><span class="keyword-cell">supplier payable</span></td><td>Liability</td><td>Supplier Payable – Local</td></tr>
+                                    <tr><td>প্রক্রিয়াধীন উৎপাদন</td><td><span class="keyword-cell">work in progress</span> বা <span class="keyword-cell">wip</span></td><td>Asset</td><td>WIP – Cutting Section</td></tr>
+                                    <tr><td>ইনভেন্টরি এডজাস্টমেন্ট লস</td><td><span class="keyword-cell">inventory adjustment</span></td><td>Expense</td><td>Inventory Adjustment Loss</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1570,52 +1693,95 @@
             <div id="section-lc" class="doc-section">
                 <div class="card card-custom">
                     <div class="card-custom-header d-flex justify-content-between align-items-center">
-                        <h2 class="h4 mb-0 text-primary font-weight-bold">১৩. Commercial Bank / LC Tracker (কমার্শিয়াল ব্যাংক ট্র্যাকার)</h2>
+                        <h2 class="h4 mb-0 text-primary font-weight-bold">১৩. Commercial Bank / LC Tracker — Manual Integration (কমার্শিয়াল ব্যাংক ট্র্যাকার)</h2>
                         <span class="badge badge-success badge-custom">LC Module</span>
                     </div>
                     <div class="card-body">
 
                         <div class="alert-callout alert-callout-tip mb-4">
-                            <strong>টিপস:</strong> এলসি নম্বর সিলেক্ট করলে সংশ্লিষ্ট ব্যাংক চার্জ, মার্জিন ব্যালেন্স ও ক্লিয়ারিং খরচ স্বয়ংক্রিয়ভাবে লোড হয়।
-                            শুধুমাত্র <strong>COA-তে ব্যাংক অ্যাকাউন্ট</strong> (কীওয়ার্ড: <code>bank</code>) সেটআপ থাকলে এই মডিউল সক্রিয় হবে।
+                            <strong>টিপস:</strong> LC Tracker মূলত আমদানি LC-র ব্যাংক চার্জ, মার্জিন ব্যালেন্স ও ক্লিয়ারিং খরচ Accounts-এ ম্যানুয়ালি পোস্ট করার সুবিধা দেয়।
+                            LC নম্বর সিলেক্ট করলে Commercial মডিউল থেকে ঐ LC-র ডেটা স্বয়ংক্রিয়ভাবে লোড হয়।
                         </div>
 
-                        <h5 class="font-weight-bold mt-3 mb-3"><i class="fa fa-ship mr-2"></i>LC Charge Types ও COA ম্যাপিং</h5>
+                        <h5 class="font-weight-bold mt-3 mb-3"><i class="fa fa-clipboard-check mr-2"></i>Pre-Conditions</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead class="thead-dark"><tr><th>#</th><th>শর্ত</th><th>কোথায় চেক করবেন</th><th>না হলে কী হবে</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>LC Commercial মডিউলে Open করা আছে</td><td>Commercial → LC Register</td><td>LC নম্বর dropdown-এ দেখা যাবে না</td></tr>
+                                    <tr><td>2</td><td>COA-তে Bank Account (<code>bank</code> keyword) আছে</td><td>Accounts → Chart of Accounts</td><td>ব্যাংক অ্যাকাউন্ট সিলেক্ট করা যাবে না</td></tr>
+                                    <tr><td>3</td><td>COA-তে LC charge type লেজার আছে</td><td>Accounts → Chart of Accounts</td><td>LC Commission / Customs Duty সিলেক্ট যাবে না</td></tr>
+                                    <tr><td>4</td><td>Financial Period Open আছে</td><td>Accounts → Tax Rates &amp; Financial Periods</td><td>Period closed error</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold mt-4 mb-3"><i class="fa fa-list-ol mr-2"></i>ধাপে ধাপে পোস্টিং SOP</h5>
+                        <div class="flow-container py-2 mb-4">
+                            <div class="flow-node"><strong>ধাপ ১:</strong> Accounts → LC Tracker → New Entry</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ২:</strong> LC Number সিলেক্ট করুন → Commercial মডিউল থেকে LC বিবরণ লোড হবে</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৩:</strong> Charge Type সিলেক্ট করুন (Bank Margin / LC Commission / Customs Duty / Clearing Charge)</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৪:</strong> Amount দিন → COA থেকে Expense/Asset লেজার ম্যাপ করুন</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node"><strong>ধাপ ৫:</strong> Bank Account (Cr) সিলেক্ট করুন</div>
+                            <div class="flow-arrow"><i class="fa fa-arrow-down"></i></div>
+                            <div class="flow-node text-white" style="background:linear-gradient(135deg,#0d9488,#0f766e)"><strong>ধাপ ৬:</strong> Submit → Voucher Register-এ LC চার্জের এন্ট্রি দেখা যাবে</div>
+                        </div>
+
+                        <h5 class="font-weight-bold mt-4 mb-3"><i class="fa fa-book-open mr-2"></i>জার্নাল প্রিভিউ — LC Commission পোস্টিং</h5>
+                        <div class="journal-preview mb-4">
+                            <span class="arr">★ LC Commission — LC No. IMP-2024-001 (Payment Voucher)</span><br>
+                            <span class="dr">  Dr.  LC Commission Expense          5,200.00  [Cost Center: Import Dept]</span><br>
+                            <span class="cr">    Cr.  Dutch Bangla Bank – Current A/C   5,200.00</span><br>
+                            <span class="arr">  ─────────────────────────────────────────────────</span><br>
+                            <span class="arr">  No Party required (ব্যাংক থেকে সরাসরি কাটা হয়েছে)  ✔</span>
+                        </div>
+
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-tags mr-2"></i>Cost Center ও Party — LC Tracker-এ কোথায় লাগে?</h5>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="border-left border-warning pl-3 py-2">
+                                    <strong class="text-warning d-block mb-1"><i class="fa fa-tags mr-1"></i>Cost Center</strong>
+                                    <p class="small text-muted mb-0"><strong>লাগবে:</strong> LC Commission / Customs Duty / Clearing Charge — এগুলো Expense লেজার, তাই Cost Center আনলক হবে।<br>
+                                    Import Department বা নির্দিষ্ট LC-র Cost Center ব্যবহার করুন।<br>
+                                    <strong>রিপোর্ট প্রভাব:</strong> LC-wise আমদানি খরচের breakdown দেখা যাবে।</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border-left border-secondary pl-3 py-2">
+                                    <strong class="text-secondary d-block mb-1"><i class="fa fa-users mr-1"></i>Party</strong>
+                                    <p class="small text-muted mb-0"><strong>সাধারণত লাগে না:</strong> LC চার্জ সরাসরি ব্যাংক থেকে কাটা হয়, তাই Supplier Party ব্যবহার হয় না।<br>
+                                    তবে যদি আলাদা C&amp;F Agent বা Clearing Agent-কে পেমেন্ট করা হয় এবং তার কাছে বাকি থাকে, তখন সেই Supplier-কে Party হিসেবে সিলেক্ট করুন।</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-danger mt-4 mb-3"><i class="fa fa-exclamation-triangle mr-2"></i>সম্ভাব্য Errors ও সমাধান</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead style="background:#7f1d1d; color:#fff;"><tr><th>Error</th><th>কারণ</th><th>সমাধান</th></tr></thead>
+                                <tbody>
+                                    <tr><td>LC Number dropdown ফাঁকা</td><td>Commercial মডিউলে LC তৈরি হয়নি</td><td>Commercial → LC Register → LC তৈরি করুন</td></tr>
+                                    <tr><td>Bank Account সিলেক্ট যাচ্ছে না</td><td>COA-তে <code>bank</code> keyword-এর Asset লেজার নেই</td><td>COA-তে Bank লেজার তৈরি করুন</td></tr>
+                                    <tr><td>LC Module নিষ্ক্রিয়</td><td>COA-তে <code>bank</code> keyword-এর কোনো লেজার নেই বা inactive</td><td>COA-তে Bank লেজার active করুন</td></tr>
+                                    <tr><td>Cost Center dropdown নিষ্ক্রিয়</td><td>সিলেক্ট করা লেজার Expense টাইপ নয়</td><td>COA-তে LC Commission লেজারের type = Expense নিশ্চিত করুন</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="font-weight-bold mt-3 mb-3"><i class="fa fa-ship mr-2"></i>বাধ্যতামূলক COA রেকর্ড — LC Charge Types</h5>
                         <div class="table-responsive">
                             <table class="coa-mandatory-table">
-                                <thead>
-                                    <tr>
-                                        <th>LC Charge Type</th>
-                                        <th>Mandatory Keyword / Pattern</th>
-                                        <th>System Account Type</th>
-                                        <th>Production Example Name</th>
-                                    </tr>
-                                </thead>
+                                <thead><tr><th>LC Charge Type</th><th>Mandatory Keyword</th><th>Account Type</th><th>Example Name</th></tr></thead>
                                 <tbody>
-                                    <tr>
-                                        <td>ব্যাংক মার্জিন (Bank Margin)</td>
-                                        <td><span class="keyword-cell">bank margin</span> বা <span class="keyword-cell">lc margin</span></td>
-                                        <td>Asset</td>
-                                        <td>LC Margin – Dutch Bangla Bank</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ব্যাংক কমিশন (LC Commission)</td>
-                                        <td><span class="keyword-cell">lc commission</span> বা <span class="keyword-cell">bank commission</span></td>
-                                        <td>Expense</td>
-                                        <td>LC Commission Expense</td>
-                                    </tr>
-                                    <tr>
-                                        <td>কাস্টমস ডিউটি (Customs Duty)</td>
-                                        <td><span class="keyword-cell">customs duty</span> বা <span class="keyword-cell">import duty</span></td>
-                                        <td>Expense</td>
-                                        <td>Customs Duty – Import</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ক্লিয়ারিং চার্জ (Clearing Charges)</td>
-                                        <td><span class="keyword-cell">clearing charge</span> বা <span class="keyword-cell">clearing expense</span></td>
-                                        <td>Expense</td>
-                                        <td>Port Clearing Charges</td>
-                                    </tr>
+                                    <tr><td>ব্যাংক মার্জিন</td><td><span class="keyword-cell">bank margin</span> বা <span class="keyword-cell">lc margin</span></td><td>Asset</td><td>LC Margin – Dutch Bangla Bank</td></tr>
+                                    <tr><td>ব্যাংক কমিশন</td><td><span class="keyword-cell">lc commission</span> বা <span class="keyword-cell">bank commission</span></td><td>Expense</td><td>LC Commission Expense</td></tr>
+                                    <tr><td>কাস্টমস ডিউটি</td><td><span class="keyword-cell">customs duty</span> বা <span class="keyword-cell">import duty</span></td><td>Expense</td><td>Customs Duty – Import</td></tr>
+                                    <tr><td>ক্লিয়ারিং চার্জ</td><td><span class="keyword-cell">clearing charge</span> বা <span class="keyword-cell">clearing expense</span></td><td>Expense</td><td>Port Clearing Charges</td></tr>
+                                    <tr><td>ব্যাংক অ্যাকাউন্ট (Cr)</td><td><span class="keyword-cell">bank</span></td><td>Asset</td><td>Dutch Bangla Bank – Current A/C</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1723,27 +1889,45 @@
                             </div>
                         </div>
 
-                        <!-- Cost Center & Party Guides -->
+                        <!-- Cost Center & Party Guides (Enhanced) -->
                         <div class="row mt-4">
                             <div class="col-lg-6 mb-3">
-                                <div class="border border-info rounded p-3 bg-white h-100">
-                                    <h4 class="h6 font-weight-bold text-info"><i class="fa fa-tags"></i> কস্ট সেন্টার গাইড (Cost Center Guide)</h4>
-                                    <p class="small text-muted">
-                                        কস্ট সেন্টার হলো ব্যয়ের উৎস ট্র্যাক করার উপায়। 
-                                        <br><strong>কখন লাগবে:</strong> যখনই কোনো <code>Expense</code> (খরচ) বা <code>Revenue</code> (আয়) লেজার সিলেক্ট করবেন, তখনই কস্ট সেন্টার সিলেক্ট করতে হবে।
-                                        <br><strong>কখন লাগবে না:</strong> ব্যালেন্স শিটের লেজারগুলোতে (যেমন: ক্যাশ, ব্যাংক, বায়ার লেজার) এটি নিষ্ক্রিয় থাকে।
-                                    </p>
+                                <div class="border border-warning rounded p-3 bg-white h-100">
+                                    <h4 class="h6 font-weight-bold text-warning"><i class="fa fa-tags mr-1"></i> Cost Center Guide</h4>
+                                    <p class="small text-muted mb-2">Cost Center = খরচ বা আয়ের <strong>উৎস চিহ্নিত করার ট্যাগ</strong>।</p>
+                                    <ul class="small pl-3 text-muted mb-0">
+                                        <li class="mb-1"><strong>Unlock:</strong> Account Type = <code>Expense</code> বা <code>Revenue</code> হলে</li>
+                                        <li class="mb-1"><strong>Locked:</strong> Asset / Liability / Equity লেজারে নিষ্ক্রিয়</li>
+                                        <li class="mb-1"><strong>Type:</strong> Department / Branch / Project / Style</li>
+                                        <li class="mb-1"><strong>Report Effect:</strong> Dept-wise P&amp;L, Style Costing, Branch Comparison</li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <div class="border border-info rounded p-3 bg-white h-100">
-                                    <h4 class="h6 font-weight-bold text-info"><i class="fa fa-users"></i> পার্টি গাইড (Party Guide)</h4>
-                                    <p class="small text-muted">
-                                        পার্টি বলতে কাস্টমার (Buyer), সরবরাহকারী (Supplier/Vendor) বা কর্মচারীকে বোঝায়।
-                                        <br><strong>কখন লাগবে:</strong> যখন কোনো লেজার অ্যাকাউন্টের নামে 'receivable' (পাওনা) বা 'payable' (দেনা) থাকে, তখন অবশ্যই পার্টি সিলেক্ট করতে হবে। এর ফলে সিস্টেম পার্টি-ওয়াইজ বকেয়া হিসাব রাখতে পারে।
-                                    </p>
+                                    <h4 class="h6 font-weight-bold text-info"><i class="fa fa-users mr-1"></i> Party Guide</h4>
+                                    <p class="small text-muted mb-1"><strong>Party কী?</strong> Buyer / Supplier / Employee</p>
+                                    <ul class="small pl-3 text-muted mb-0">
+                                        <li class="mb-1"><strong>উৎস:</strong> Buyer Master / Supplier Master / Employee Master</li>
+                                        <li class="mb-1"><strong>Unlock:</strong> Account Name-এ <code>receivable</code> বা <code>payable</code> থাকলে</li>
+                                        <li class="mb-1"><strong>কেন লাগে:</strong> প্রতিটি Buyer/Supplier-এর বকেয়া আলাদাভাবে ট্র্যাক করতে</li>
+                                        <li class="mb-1"><strong>Reports:</strong> Party Outstanding, Aging (Receivable/Payable), Party Ledger</li>
+                                    </ul>
                                 </div>
                             </div>
+                        </div>
+
+                        <h5 class="font-weight-bold text-info mt-4 mb-3"><i class="fa fa-chart-line mr-2"></i>Party Report — কীভাবে তৈরি হচ্ছে?</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-sm table-bordered">
+                                <thead style="background:#1e3a5f; color:#fff;"><tr><th>Report Name</th><th>Party Type</th><th>কী দেখা যায়</th><th>Route</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Aging Report (Receivable)</td><td>Buyer</td><td>Buyer-এর 30/60/90 days বকেয়া breakdown</td><td>Reports → Management &amp; Audit</td></tr>
+                                    <tr><td>Aging Report (Payable)</td><td>Supplier</td><td>Supplier-কে কত টাকা দিতে হবে, কত পুরনো</td><td>Reports → Management &amp; Audit</td></tr>
+                                    <tr><td>Party Ledger Balance</td><td>All</td><td>নির্দিষ্ট Buyer/Supplier-এর সব লেনদেন</td><td>Reports → Account Balance</td></tr>
+                                    <tr><td>Party Outstanding</td><td>All</td><td>মোট বকেয়া দেনা-পাওনার তালিকা</td><td>Reports → Management &amp; Audit</td></tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <!-- Relation between COA Names and Voucher Fields -->
@@ -2232,10 +2416,61 @@ class ErpAccountMandatoryCOASeeder extends Seeder
                                     উত্তর: যখনই কোনো লেজারের টাইপ <code>Expense</code> (ব্যয়) বা <code>Revenue</code> (আয়) হবে, তখনই প্রজেক্ট বা ডিপার্টমেন্ট ট্র্যাকিংয়ের স্বার্থে কস্ট সেন্টার কলামটি আনলক হবে এবং ডাটা সিলেক্ট করা বাধ্যতামূলক হবে।
                                 </div>
                             </div>
+                            <div class="card border-0 mb-2">
+                                <div class="bg-light p-2 font-weight-bold small" style="cursor:pointer;" data-toggle="collapse" data-target="#faq3">
+                                    Q: বিদ্যুৎ বিল (Electricity Bill) মাসের ১ তারিখে entry করলাম, কিন্তু payment করব ১০ তারিখে — তাহলে কি ১০ তারিখে আলাদা entry করতে পারব?
+                                </div>
+                                <div id="faq3" class="collapse show p-3 border-top small text-muted">
+                                    <strong class="text-success d-block mb-2">হ্যাঁ, অবশ্যই পারবেন — এটাই সঠিক Accrual Accounting পদ্ধতি।</strong>
+                                    <p class="mb-2">এটি দুই ধাপে করতে হয়:</p>
+
+                                    <strong class="text-dark">ধাপ ১ — ১ তারিখে Accrual Entry (Journal Voucher)</strong>
+                                    <div class="journal-preview my-2" style="font-size:0.78rem;">
+                                        <span class="arr">★ Electricity Bill Accrual — 01/06/2024  [Journal Voucher]</span><br>
+                                        <span class="dr">  Dr.  Electricity Bill (Expense)   5,000.00  [Cost Center: Factory Dept]</span><br>
+                                        <span class="cr">    Cr.  Electricity Bill Payable (Liability)  5,000.00</span><br>
+                                        <span class="arr">  কারণ: বিল তৈরি হয়েছে কিন্তু এখনো টাকা দেওয়া হয়নি</span>
+                                    </div>
+
+                                    <strong class="text-dark">ধাপ ২ — ১০ তারিখে Payment Entry (Payment Voucher)</strong>
+                                    <div class="journal-preview my-2" style="font-size:0.78rem;">
+                                        <span class="arr">★ Electricity Bill Payment — 10/06/2024  [Payment Voucher]</span><br>
+                                        <span class="dr">  Dr.  Electricity Bill Payable (Liability)  5,000.00</span><br>
+                                        <span class="cr">    Cr.  Dutch Bangla Bank / Cash in Hand       5,000.00</span><br>
+                                        <span class="arr">  কারণ: Liability clear হচ্ছে, ব্যাংক/ক্যাশ থেকে payment গেছে</span>
+                                    </div>
+
+                                    <div class="alert-callout alert-callout-tip mt-2 mb-0">
+                                        <strong>COA দরকার:</strong> (১) <code>Electricity Bill</code> — Expense type, (২) <code>Electricity Bill Payable</code> — Liability type।
+                                        Payable লেজারের নামে <code>payable</code> keyword থাকলে Party সিলেক্ট করা যাবে (যদি specific Supplier-এর কাছে দেনা থাকে)।
+                                        <br><strong>সরল পথ:</strong> একই দিনে bill ও payment হলে সরাসরি Payment Voucher-এ Dr. Electricity Bill (Expense) → Cr. Bank দিলেই চলবে।
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card border-0 mb-2">
+                                <div class="bg-light p-2 font-weight-bold small" style="cursor:pointer;" data-toggle="collapse" data-target="#faq4">
+                                    Q: Journal Voucher বনাম Payment Voucher — কোনটি কখন ব্যবহার করব?
+                                </div>
+                                <div id="faq4" class="collapse p-2 border-top small text-muted">
+                                    <table class="table table-sm table-bordered mb-0">
+                                        <thead class="thead-dark"><tr><th>পরিস্থিতি</th><th>সঠিক Voucher</th><th>কারণ</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>বিদ্যুৎ বিল তৈরি হয়েছে, payment পরে হবে</td><td>Journal Voucher</td><td>Cash/Bank movement নেই, শুধু Expense ও Payable</td></tr>
+                                            <tr><td>বিদ্যুৎ বিল সরাসরি ব্যাংক থেকে পরিশোধ</td><td>Payment Voucher</td><td>ব্যাংক থেকে টাকা বের হচ্ছে</td></tr>
+                                            <tr><td>বেতন Accrual (মাস শেষে)</td><td>Journal Voucher</td><td>Cash/Bank movement নেই</td></tr>
+                                            <tr><td>বেতন Payment (ব্যাংক/ক্যাশে)</td><td>Payment Voucher</td><td>Bank/Cash থেকে টাকা বের হচ্ছে</td></tr>
+                                            <tr><td>Buyer থেকে টাকা ব্যাংকে জমা</td><td>Receipt Voucher</td><td>Bank-এ টাকা ঢুকছে</td></tr>
+                                            <tr><td>ক্যাশ থেকে ব্যাংকে জমা</td><td>Contra Voucher</td><td>দুটিই Cash/Bank — Internal Transfer</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                 </div>
+            </div>
+
             </div>
 
 
