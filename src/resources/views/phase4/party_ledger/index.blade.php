@@ -10,7 +10,7 @@
             <div class="card-body p-4 p-lg-5">
                 <p class="small font-weight-bold text-uppercase mb-2" style="letter-spacing: .2rem; color: #bbf7d0;">Reports</p>
                 <h1 class="h3 mb-2 text-white">Party Ledger History</h1>
-                <p class="mb-0" style="color: #dcfce7;">Track full transaction history with opening balance, running balance, and closing balance by Buyer, Supplier, or Employee.</p>
+                <p class="mb-0" style="color: #dcfce7;">Track full transaction history with opening balance, running balance, and closing balance by Debitor (Buyer), Creditor (Supplier), or Employee.</p>
             </div>
         </div>
 
@@ -29,8 +29,8 @@
                         <label>Party Type</label>
                         <select name="party_type" id="party_type_filter" class="form-control">
                             <option value="">Select Type</option>
-                            <option value="Buyer" {{ $filters['party_type'] === 'Buyer' ? 'selected' : '' }}>Buyer</option>
-                            <option value="Supplier" {{ $filters['party_type'] === 'Supplier' ? 'selected' : '' }}>Supplier</option>
+                            <option value="Buyer" {{ $filters['party_type'] === 'Buyer' ? 'selected' : '' }}>Debitor (Buyer)</option>
+                            <option value="Supplier" {{ $filters['party_type'] === 'Supplier' ? 'selected' : '' }}>Creditor (Supplier)</option>
                             <option value="Employee" {{ $filters['party_type'] === 'Employee' ? 'selected' : '' }}>Employee</option>
                         </select>
                     </div>

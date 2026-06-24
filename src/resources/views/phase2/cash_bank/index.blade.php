@@ -80,8 +80,8 @@
                         <td>
                             <select class="form-control form-control-sm ${prefix}-party-type d-none" name="rows[${index}][party_type]">
                                 <option value="None">None</option>
-                                <option value="Buyer">Buyer</option>
-                                <option value="Supplier">Supplier</option>
+                                <option value="Buyer">Debitor (Buyer)</option>
+                                <option value="Supplier">Creditor (Supplier)</option>
                                 <option value="Employee">Employee</option>
                             </select>
                         </td>

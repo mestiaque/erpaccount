@@ -3,12 +3,12 @@
 namespace ME\Erpaccount\Http\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use ME\Erpaccount\Models\ChartOfAccount;
+use ME\Erpaccount\Models\Creditor;
+use ME\Erpaccount\Models\Debitor;
 use ME\Erpaccount\Support\JournalQueryScopes;
 
 class PartyLedgerController extends Controller
@@ -257,150 +257,80 @@ class PartyLedgerController extends Controller
 
     private function resolvePartyInfo(string $partyType, int $partyId): array
     {
-        $userModelClass = config('auth.providers.users.model');
-        if (!is_string($userModelClass) || !class_exists($userModelClass)) {
+        if ($partyType === 'Supplier') {
+            $creditor = Creditor::query()->find($partyId);
             return [
-                'name' => $partyType . '-' . $partyId,
+                'name'   => $creditor ? $creditor->name : 'Creditor-' . $partyId,
                 'ledger' => null,
             ];
         }
 
-        $model = app($userModelClass);
-        if (!$model instanceof Model) {
+        if ($partyType === 'Buyer') {
+            $debitor = Debitor::query()->find($partyId);
             return [
-                'name' => $partyType . '-' . $partyId,
+                'name'   => $debitor ? $debitor->name : 'Debitor-' . $partyId,
                 'ledger' => null,
             ];
         }
 
-        $query = $userModelClass::query()->whereKey($partyId);
-
-        if (method_exists($model, 'scopeFilterByType')) {
-            $query->filterByType(strtolower($partyType));
-        } else {
-            $table = $model->getTable();
-            if (Schema::hasColumn($table, 'type')) {
-                $query->where('type', strtolower($partyType));
-            } elseif (Schema::hasColumn($table, 'user_type')) {
-                $query->where('user_type', strtolower($partyType));
-            }
-        }
-
-        $user = $query->first();
-        if (!$user instanceof Model) {
-            return [
-                'name' => $partyType . '-' . $partyId,
-                'ledger' => null,
-            ];
+        if ($partyType === 'Employee') {
+            return $this->resolveEmployeeInfo($partyId);
         }
 
         return [
-            'name' => $this->resolvePartyDisplayName($user),
-            'ledger' => $this->resolvePartyLedgerLabel($user, $partyType),
+            'name'   => $partyType . '-' . $partyId,
+            'ledger' => null,
         ];
     }
 
-    private function resolvePartyDisplayName(Model $user): string
+    private function resolveEmployeeInfo(int $partyId): array
     {
-        $candidates = [
-            data_get($user, 'name'),
-            data_get($user, 'full_name'),
-            data_get($user, 'company_name'),
-            data_get($user, 'display_name'),
-            data_get($user, 'username'),
-        ];
-
-        foreach ($candidates as $value) {
-            if (is_string($value) && trim($value) !== '') {
-                return trim($value);
-            }
+        $class = 'ME\\Hr\\Models\\HrEmployee';
+        if (!class_exists($class)) {
+            return ['name' => 'Employee-' . $partyId, 'ledger' => null];
         }
 
-        return 'User-' . $user->getKey();
+        $emp = $class::query()->find($partyId);
+        if (!$emp) {
+            return ['name' => 'Employee-' . $partyId, 'ledger' => null];
+        }
+
+        $name = $this->empStr($emp->name ?? $emp->full_name ?? null)
+                ?? ('Employee-' . $partyId);
+
+        $meta = array_values(array_filter([
+            $this->empStr($emp->employee_id ?? null),
+            $this->empStr($emp->designation ?? null),
+            $this->empStr($emp->department  ?? null),
+            $this->empStr($emp->section     ?? null),
+            $this->empStr($emp->subsection  ?? null),
+        ]));
+
+        $label = $name . (!empty($meta) ? ' (' . implode(', ', $meta) . ')' : '');
+
+        return ['name' => $label, 'ledger' => null];
     }
 
-    private function resolvePartyLedgerLabel(Model $user, ?string $partyType = null): ?string
+    private function empStr(mixed $value): ?string
     {
-        $linkedAccountId = data_get($user, 'account_id');
-        if (!empty($linkedAccountId)) {
-            $ledger = ChartOfAccount::query()
-                ->where('account_id', (int) $linkedAccountId)
-                ->select(['account_code', 'account_name'])
-                ->first();
-
-            if ($ledger) {
-                return trim($ledger->account_code) . ' - ' . trim($ledger->account_name);
+        if ($value === null || $value === '' || is_bool($value)) {
+            return null;
+        }
+        if (is_string($value)) {
+            $v = trim($value);
+            if ($v === '') return null;
+            if ($v[0] === '{' || $v[0] === '[') {
+                $decoded = json_decode($v, true);
+                if (is_array($decoded)) {
+                    return $this->empStr($decoded['name'] ?? $decoded['title'] ?? null);
+                }
             }
+            return $v;
         }
-
-        $candidates = [
-            data_get($user, 'ledger_name'),
-            data_get($user, 'party_ledger_name'),
-            data_get($user, 'account_name'),
-            data_get($user, 'ledger_code'),
-            data_get($user, 'account_code'),
-        ];
-
-        foreach ($candidates as $value) {
-            if (is_string($value) && trim($value) !== '') {
-                return trim($value);
-            }
-        }
-
-        $coaCode = data_get($user, 'account_code');
-        $coaName = data_get($user, 'account_name');
-        if (is_string($coaCode) && trim($coaCode) !== '' && is_string($coaName) && trim($coaName) !== '') {
-            return trim($coaCode) . ' - ' . trim($coaName);
-        }
-
-        $defaultLedger = $this->defaultLedgerByPartyType($partyType);
-        if ($defaultLedger !== null) {
-            return $defaultLedger;
-        }
-
+        if (is_numeric($value)) return (string) $value;
+        if (is_array($value))   return $this->empStr($value['name'] ?? $value['title'] ?? null);
+        if (is_object($value))  return $this->empStr($value->name ?? $value->title ?? null);
         return null;
-    }
-
-    private function defaultLedgerByPartyType(?string $partyType): ?string
-    {
-        if (!is_string($partyType) || trim($partyType) === '') {
-            return null;
-        }
-
-        static $cache = [];
-        $type = strtolower(trim($partyType));
-
-        if (array_key_exists($type, $cache)) {
-            return $cache[$type];
-        }
-
-        $query = ChartOfAccount::query()->where('is_active', true);
-
-        if ($type === 'supplier') {
-            $query->whereRaw('LOWER(account_name) like ?', ['%payable%']);
-        } elseif ($type === 'buyer') {
-            $query->whereRaw('LOWER(account_name) like ?', ['%receivable%']);
-        } elseif ($type === 'employee') {
-            $query->where(function ($q) {
-                $q->whereRaw('LOWER(account_name) like ?', ['%employee%'])
-                    ->orWhereRaw('LOWER(account_name) like ?', ['%salary%'])
-                    ->orWhereRaw('LOWER(account_name) like ?', ['%payable%']);
-            });
-        } else {
-            $cache[$type] = null;
-            return null;
-        }
-
-        $ledger = $query
-            ->orderBy('account_code')
-            ->select(['account_code', 'account_name'])
-            ->first();
-
-        $cache[$type] = $ledger
-            ? trim($ledger->account_code) . ' - ' . trim($ledger->account_name)
-            : null;
-
-        return $cache[$type];
     }
 
     private function balanceSide(float $value): string

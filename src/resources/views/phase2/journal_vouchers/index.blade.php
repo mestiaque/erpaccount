@@ -133,8 +133,8 @@
                         <td>
                             <select class="form-control form-control-sm party-type-select d-none" name="rows[${rowIndex}][party_type]">
                                 <option value="None" ${selectedPartyType === 'None' ? 'selected' : ''}>None</option>
-                                <option value="Buyer" ${selectedPartyType === 'Buyer' ? 'selected' : ''}>Buyer</option>
-                                <option value="Supplier" ${selectedPartyType === 'Supplier' ? 'selected' : ''}>Supplier</option>
+                                <option value="Buyer" ${selectedPartyType === 'Buyer' ? 'selected' : ''}>Debitor (Buyer)</option>
+                                <option value="Supplier" ${selectedPartyType === 'Supplier' ? 'selected' : ''}>Creditor (Supplier)</option>
                                 <option value="Employee" ${selectedPartyType === 'Employee' ? 'selected' : ''}>Employee</option>
                             </select>
                         </td>

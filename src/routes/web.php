@@ -20,6 +20,9 @@ use ME\Erpaccount\Http\Controllers\StyleProfitabilityController;
 use ME\Erpaccount\Http\Controllers\TaxRateController;
 use ME\Erpaccount\Http\Controllers\VoucherRegisterController;
 use ME\Erpaccount\Http\Controllers\ApprovalQueueController;
+use ME\Erpaccount\Http\Controllers\CreditorController;
+use ME\Erpaccount\Http\Controllers\DebitorController;
+use ME\Erpaccount\Http\Controllers\IouController;
 
 $webMiddleware = config('erpaccount.route_middleware', ['web']);
 
@@ -110,5 +113,18 @@ Route::middleware($webMiddleware)->prefix('erpaccount')->as('erpaccount.')->grou
     Route::get('party-ledger', [PartyLedgerController::class, 'index'])->name('party-ledger.index');
     Route::get('party-ledger/export-excel', [PartyLedgerController::class, 'exportExcel'])->name('party-ledger.export-excel');
     Route::get('party-ledger/print', [PartyLedgerController::class, 'printFriendly'])->name('party-ledger.print');
+
+    Route::resource('creditors', CreditorController::class)
+        ->parameters(['creditors' => 'creditor'])
+        ->except(['create', 'show', 'edit']);
+
+    Route::resource('debitors', DebitorController::class)
+        ->parameters(['debitors' => 'debitor'])
+        ->except(['create', 'show', 'edit']);
+
+    Route::get('iou', [IouController::class, 'index'])->name('iou.index');
+    Route::post('iou', [IouController::class, 'store'])->name('iou.store');
+    Route::get('iou/{iou}', [IouController::class, 'show'])->name('iou.show');
+    Route::post('iou/{iou}/settle', [IouController::class, 'settle'])->name('iou.settle');
 });
 

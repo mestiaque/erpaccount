@@ -6,12 +6,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use ME\Erpaccount\Http\Requests\JournalVoucherStoreRequest;
 use ME\Erpaccount\Models\ChartOfAccount;
 use ME\Erpaccount\Models\CostCenter;
+use ME\Erpaccount\Models\Creditor;
+use ME\Erpaccount\Models\Debitor;
 use ME\Erpaccount\Models\JournalDetail;
 use ME\Erpaccount\Models\JournalMaster;
 use ME\Erpaccount\Support\VoucherNumberGenerator;
@@ -143,156 +143,104 @@ class JournalVoucherController extends Controller
 
     private function loadPartyOptions(string $partyType): array
     {
-        $userModelClass = config('auth.providers.users.model');
-        if (!is_string($userModelClass) || !class_exists($userModelClass)) {
+        if ($partyType === 'Supplier') {
+            return Creditor::query()
+                ->where('is_active', true)
+                ->orderBy('name')
+                ->get()
+                ->map(fn (Creditor $c) => [
+                    'id'           => $c->creditor_id,
+                    'name'         => $c->name,
+                    'display_name' => 'CRD-' . str_pad((string) $c->creditor_id, 4, '0', STR_PAD_LEFT) . ' | ' . $c->name,
+                ])
+                ->values()
+                ->all();
+        }
+
+        if ($partyType === 'Buyer') {
+            return Debitor::query()
+                ->where('is_active', true)
+                ->orderBy('name')
+                ->get()
+                ->map(fn (Debitor $d) => [
+                    'id'           => $d->debitor_id,
+                    'name'         => $d->name,
+                    'display_name' => 'DBT-' . str_pad((string) $d->debitor_id, 4, '0', STR_PAD_LEFT) . ' | ' . $d->name,
+                ])
+                ->values()
+                ->all();
+        }
+
+        if ($partyType === 'Employee') {
+            return $this->loadEmployeeOptions();
+        }
+
+        return [];
+    }
+
+    private function loadEmployeeOptions(): array
+    {
+        $class = 'ME\\Hr\\Models\\HrEmployee';
+        if (!class_exists($class)) {
             return [];
         }
 
-        $model = app($userModelClass);
-        if (!$model instanceof Model) {
-            return [];
-        }
-
-        $query = $userModelClass::query();
-        $filterType = strtolower($partyType);
-
-        if (method_exists($model, 'scopeFilterByType')) {
-            $query->filterByType($filterType);
-        } else {
-            $table = $model->getTable();
-            if (Schema::hasColumn($table, 'type')) {
-                $query->where('type', $filterType);
-            } elseif (Schema::hasColumn($table, 'user_type')) {
-                $query->where('user_type', $filterType);
-            }
-        }
-
-        $table = $model->getTable();
-        if (Schema::hasColumn($table, 'is_active')) {
-            $query->where('is_active', true);
-        }
-
-        return $query
-            ->orderBy($model->getKeyName())
-            ->limit(300)
+        return $class::query()
+            ->orderBy('employee_id')
+            ->limit(500)
             ->get()
-            ->map(function (Model $user) use ($partyType) {
-                $name = $this->resolvePartyDisplayName($user);
-                $ledger = $this->resolvePartyLedgerLabel($user, $partyType);
+            ->map(function ($emp) {
+                $name = $this->empStr($emp->name ?? $emp->full_name ?? null)
+                        ?? ('Employee-' . $emp->id);
 
-                $label = 'Ledger: ' . ($ledger ?? 'Not Linked') . ' | ' . $name . ' (ID: ' . $user->getKey() . ')';
+                $parts = array_values(array_filter([
+                    $this->empStr($emp->employee_id   ?? null),
+                    $name,
+                    $this->empStr($emp->designation   ?? null),
+                    $this->empStr($emp->department    ?? null),
+                    $this->empStr($emp->section       ?? null),
+                    $this->empStr($emp->subsection    ?? null),
+                ]));
 
                 return [
-                    'id' => (int) $user->getKey(),
-                    'name' => $name,
-                    'ledger' => $ledger,
-                    'display_name' => $label,
+                    'id'           => $emp->id,
+                    'name'         => $name,
+                    'display_name' => implode(' | ', $parts),
                 ];
             })
             ->values()
             ->all();
     }
 
-    private function resolvePartyDisplayName(Model $user): string
+    private function empStr(mixed $value): ?string
     {
-        $candidates = [
-            data_get($user, 'name'),
-            data_get($user, 'full_name'),
-            data_get($user, 'company_name'),
-            data_get($user, 'display_name'),
-            data_get($user, 'username'),
-        ];
-
-        foreach ($candidates as $value) {
-            if (is_string($value) && trim($value) !== '') {
-                return trim($value);
+        if ($value === null || $value === '') {
+            return null;
+        }
+        if (is_bool($value)) {
+            return null;
+        }
+        if (is_string($value)) {
+            $v = trim($value);
+            if ($v === '') return null;
+            // JSON-cast string like {"id":3,"name":"Production"} — extract name
+            if ($v[0] === '{' || $v[0] === '[') {
+                $decoded = json_decode($v, true);
+                if (is_array($decoded)) {
+                    return $this->empStr($decoded['name'] ?? $decoded['title'] ?? null);
+                }
             }
+            return $v;
         }
-
-        return 'User-' . $user->getKey();
-    }
-
-    private function resolvePartyLedgerLabel(Model $user, ?string $partyType = null): ?string
-    {
-        $linkedAccountId = data_get($user, 'account_id');
-        if (!empty($linkedAccountId)) {
-            $ledger = ChartOfAccount::query()
-                ->where('account_id', (int) $linkedAccountId)
-                ->select(['account_code', 'account_name'])
-                ->first();
-
-            if ($ledger) {
-                return trim($ledger->account_code) . ' - ' . trim($ledger->account_name);
-            }
+        if (is_numeric($value)) {
+            return (string) $value;
         }
-
-        $candidates = [
-            data_get($user, 'ledger_name'),
-            data_get($user, 'party_ledger_name'),
-            data_get($user, 'account_name'),
-            data_get($user, 'ledger_code'),
-            data_get($user, 'account_code'),
-        ];
-
-        foreach ($candidates as $value) {
-            if (is_string($value) && trim($value) !== '') {
-                return trim($value);
-            }
+        if (is_array($value)) {
+            return $this->empStr($value['name'] ?? $value['title'] ?? null);
         }
-
-        $coaCode = data_get($user, 'account_code');
-        $coaName = data_get($user, 'account_name');
-        if (is_string($coaCode) && trim($coaCode) !== '' && is_string($coaName) && trim($coaName) !== '') {
-            return trim($coaCode) . ' - ' . trim($coaName);
+        if (is_object($value)) {
+            return $this->empStr($value->name ?? $value->title ?? null);
         }
-
-        $defaultLedger = $this->defaultLedgerByPartyType($partyType);
-        if ($defaultLedger !== null) {
-            return $defaultLedger;
-        }
-
         return null;
-    }
-
-    private function defaultLedgerByPartyType(?string $partyType): ?string
-    {
-        if (!is_string($partyType) || trim($partyType) === '') {
-            return null;
-        }
-
-        static $cache = [];
-        $type = strtolower(trim($partyType));
-
-        if (array_key_exists($type, $cache)) {
-            return $cache[$type];
-        }
-
-        $query = ChartOfAccount::query()->where('is_active', true);
-
-        if ($type === 'supplier') {
-            $query->whereRaw('LOWER(account_name) like ?', ['%payable%']);
-        } elseif ($type === 'buyer') {
-            $query->whereRaw('LOWER(account_name) like ?', ['%receivable%']);
-        } elseif ($type === 'employee') {
-            $query->where(function ($q) {
-                $q->whereRaw('LOWER(account_name) like ?', ['%employee%'])
-                    ->orWhereRaw('LOWER(account_name) like ?', ['%salary%'])
-                    ->orWhereRaw('LOWER(account_name) like ?', ['%payable%']);
-            });
-        } else {
-            $cache[$type] = null;
-            return null;
-        }
-
-        $ledger = $query
-            ->orderBy('account_code')
-            ->select(['account_code', 'account_name'])
-            ->first();
-
-        $cache[$type] = $ledger
-            ? trim($ledger->account_code) . ' - ' . trim($ledger->account_name)
-            : null;
-
-        return $cache[$type];
     }
 }

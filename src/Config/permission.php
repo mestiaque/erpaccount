@@ -85,6 +85,26 @@ return [
                     'all'    => 'All',
                 ],
             ],
+            'creditors' => [
+                'label'       => 'Creditors (Supplier)',
+                'permissions' => [
+                    'list'   => 'List',
+                    'add'    => 'Create',
+                    'edit'   => 'Edit',
+                    'delete' => 'Delete',
+                    'all'    => 'All',
+                ],
+            ],
+            'debitors' => [
+                'label'       => 'Debitors (Buyer)',
+                'permissions' => [
+                    'list'   => 'List',
+                    'add'    => 'Create',
+                    'edit'   => 'Edit',
+                    'delete' => 'Delete',
+                    'all'    => 'All',
+                ],
+            ],
                         'universal_voucher_entry' => [
                 'label'       => 'Universal Voucher Entry',
                 'permissions' => [
