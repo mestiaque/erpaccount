@@ -178,11 +178,14 @@ class IouController extends Controller
 
         $validated = $request->validate([
             'settlement_date'   => ['required', 'date'],
-            'settled_amount'    => ['required', 'numeric', 'min:0.01', 'max:' . $outstanding],
             'settlement_type'   => ['required', 'in:cash,bank,salary_adjust,other'],
             'offset_account_id' => ['required', 'integer', 'exists:acc_chart_of_accounts,account_id'],
             'note'              => ['nullable', 'string', 'max:255'],
         ]);
+
+        // Settlement always closes the full outstanding IOU amount.
+        // Actual expense is recorded separately via Universal Voucher Entry.
+        $settleAmount = $outstanding;
 
         DB::beginTransaction();
         try {
@@ -207,7 +210,7 @@ class IouController extends Controller
                 'cost_center_id'=> null,
                 'party_type'    => 'None',
                 'party_id'      => null,
-                'debit_amount'  => round((float) $validated['settled_amount'], 2),
+                'debit_amount'  => $settleAmount,
                 'credit_amount' => 0.00,
             ]);
 
@@ -218,13 +221,13 @@ class IouController extends Controller
                 'party_type'    => 'None',
                 'party_id'      => null,
                 'debit_amount'  => 0.00,
-                'credit_amount' => round((float) $validated['settled_amount'], 2),
+                'credit_amount' => $settleAmount,
             ]);
 
             IouSettlement::query()->create([
                 'iou_id'            => $iou->iou_id,
                 'settlement_date'   => $validated['settlement_date'],
-                'settled_amount'    => round((float) $validated['settled_amount'], 2),
+                'settled_amount'    => $settleAmount,
                 'settlement_type'   => $validated['settlement_type'],
                 'offset_account_id' => (int) $validated['offset_account_id'],
                 'note'              => $validated['note'] ?? null,

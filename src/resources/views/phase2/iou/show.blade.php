@@ -93,10 +93,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Amount <span class="text-danger">*</span></label>
-                                <input type="number" name="settled_amount" class="form-control" step="0.01" min="0.01"
-                                    max="{{ $outstanding }}" value="{{ old('settled_amount') }}" required>
-                                <small class="text-muted">Max outstanding: {{ number_format($outstanding, 2) }}</small>
+                                <label>Adjustment Amount</label>
+                                <input type="text" class="form-control font-weight-bold bg-light"
+                                    value="{{ number_format($outstanding, 2) }}" readonly>
+                                <small class="text-muted">Full IOU advance amount — actual expense record via Universal Voucher Entry</small>
                             </div>
 
                             <div class="form-group">
