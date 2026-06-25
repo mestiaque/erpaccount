@@ -105,6 +105,16 @@ return [
                     'all'    => 'All',
                 ],
             ],
+            'iou' => [
+                'label'       => 'IOU / Staff Advance',
+                'permissions' => [
+                    'list'   => 'List',
+                    'add'    => 'Create',
+                    'edit'   => 'Edit',
+                    'delete' => 'Delete',
+                    'all'    => 'All',
+                ],
+            ],
                         'universal_voucher_entry' => [
                 'label'       => 'Universal Voucher Entry',
                 'permissions' => [

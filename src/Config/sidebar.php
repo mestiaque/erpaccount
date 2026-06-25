@@ -139,7 +139,7 @@ return [
                             'icon'       => 'fa-solid fa-arrow-right',
                             'route'      => '/erpaccount/iou',
                             'icon_color' => 'text-warning',
-                            'permission' => '',
+                            'permission' => 'iou',
                         ],
                     ],
                 ],
