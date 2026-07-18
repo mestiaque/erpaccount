@@ -105,7 +105,7 @@ return [
                     'all'    => 'All',
                 ],
             ],
-            'iou' => [
+            'iouu' => [
                 'label'       => 'IOU / Staff Advance',
                 'permissions' => [
                     'list'   => 'List',
